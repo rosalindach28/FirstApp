@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatefulWidget {
-  LoginPage({Key? key, required this.title}) : super(key: key);
+class SignUpPage extends StatefulWidget {
+  SignUpPage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _SignUpPageState createState() => _SignUpPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignUpPageState extends State<SignUpPage> {
   int _counter = 0;
 
   void _incrementCounter() {
@@ -30,19 +30,25 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Login',
+              'Sign Up',
               style: Theme.of(context).textTheme.headline4,
             ),
             Text(
-              'Username: ',
+              'Name:',
             ),
             Text(
-              'Password: ',
+              'Email:',
+            ),
+            Text(
+              'Username:',
+            ),
+            Text(
+              'Password:',
             ),
             //Text(
-              //'$_counter',
-             // style: Theme.of(context).textTheme.headline4,
-           // ),
+            //'$_counter',
+            // style: Theme.of(context).textTheme.headline4,
+            // ),
           ],
         ),
       ),
