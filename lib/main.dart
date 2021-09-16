@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'login_screen.dart';
 import 'sign_up_screen.dart';
+import 'subscription_details_screen.dart';
 
 void main() {
   runApp(MyApp());
