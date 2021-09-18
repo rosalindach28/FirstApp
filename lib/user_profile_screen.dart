@@ -1,28 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/main.dart';
-import 'package:my_app/sign_up_screen.dart';
 
-class LoginPage extends StatefulWidget {
-  LoginPage({Key? key, required this.title}) : super(key: key);
+class UserProfilePage extends StatefulWidget {
+  UserProfilePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _UserProfilePageState createState() => _UserProfilePageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _UserProfilePageState extends State<UserProfilePage> {
   int _counter = 0;
 
   void _incrementCounter() {
     setState(() {
       _counter++;
     });
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => HomePage(title: 'HOME',)),
-    );
-
   }
 
   @override
@@ -37,29 +30,30 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Login',
+              'My Profile',
               style: Theme.of(context).textTheme.headline4,
             ),
             Text(
-              'Username: ',
+              'Name: ',
             ),
             Text(
-              'Password: ',
+              'Email: ',
             ),
             Text(
-              'Need an account?',
+              '-------------------'
+                  ' Manage Subscriptions '
+                  '------------------ ',
             ),
-            // Sign Up button here
             //Text(
-              //'$_counter',
-             // style: Theme.of(context).textTheme.headline4,
-           // ),
+            //'$_counter',
+            // style: Theme.of(context).textTheme.headline4,
+            // ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
+        onPressed: _incrementCounter, // go to add sub page
+        tooltip: 'Add new subscription',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );

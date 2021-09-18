@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/login_screen.dart';
 
 class SignUpPage extends StatefulWidget {
   SignUpPage({Key? key, required this.title}) : super(key: key);
@@ -16,6 +17,10 @@ class _SignUpPageState extends State<SignUpPage> {
     setState(() {
       _counter++;
     });
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => LoginPage(title: 'Log in to account',)),
+    );
   }
 
   @override
