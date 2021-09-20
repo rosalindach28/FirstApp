@@ -32,11 +32,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<HomePage> {
- // int _counter = 0;
 
   void _setState() {
     setState(() {
-      //_counter++;
     });
 
   }
@@ -59,6 +57,7 @@ class _MyHomePageState extends State<HomePage> {
             Text(
               'Your Subscriptions: ',
               // list of active subscriptions
+              // listview
             ),
           ],
         ),
