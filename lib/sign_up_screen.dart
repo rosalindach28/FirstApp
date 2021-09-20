@@ -34,34 +34,82 @@ class _SignUpPageState extends State<SignUpPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'Sign Up',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+            // Text(
+            //   'Sign Up',
+            //   style: Theme.of(context).textTheme.headline4,
+            // ),
             Text(
               'Name:',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.lightBlue,
+                )
             ),
             Text(
               'Email:',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.lightBlue,
+                )
             ),
             Text(
               'Username:',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.lightBlue,
+                )
             ),
             Text(
               'Password:',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.lightBlue,
+                )
             ),
-            //Text(
-            //'$_counter',
-            // style: Theme.of(context).textTheme.headline4,
-            // ),
+
+        // TextButton(
+        //   style: TextButton.styleFrom(
+        //     textStyle: const TextStyle(fontSize: 22),
+        //   ),
+        //   onPressed: () {
+        //     Navigator.push(
+        //       context,
+        //       MaterialPageRoute(builder: (context) => LoginPage(title: 'Log in',)),
+        //     );
+        //   },
+        //   child: Text(
+        //       'Confirm',
+        //       style: TextStyle(
+        //         fontSize: 20,
+        //         //fontWeight: FontWeight.bold,
+        //   )
+        //   ),
+        // ),
+
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            textStyle: const TextStyle(
+              fontSize: 22,
+            ),
+
+          ),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => LoginPage(title: 'Login',)),
+            );
+          },
+          child: Text(
+              'Confirm'
+          ),
+        )
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/main.dart';
-import 'package:my_app/sign_up_screen.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key, required this.title}) : super(key: key);
@@ -18,11 +17,6 @@ class _LoginPageState extends State<LoginPage> {
     setState(() {
       _counter++;
     });
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => HomePage(title: 'HOME',)),
-    );
-
   }
 
   @override
@@ -37,31 +31,72 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Login',
-              style: Theme.of(context).textTheme.headline4,
+              'SubWatch',
+               style: TextStyle(
+                fontSize: 40,
+                fontWeight: FontWeight.bold,
+              )
             ),
             Text(
               'Username: ',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.lightBlue,
+              )
             ),
             Text(
               'Password: ',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.lightBlue,
+              )
+            ),
+            // Login button
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: const TextStyle(fontSize: 22),
+              ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomePage(title: 'Home',)),
+                  );
+                },
+                child: Text(
+                  'Login'
+                ),
             ),
             Text(
-              'Need an account?',
+                'Forgot Password?',
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                   // backgroundColor: Colors.green
+                )
             ),
-            // Sign Up button here
-            //Text(
-              //'$_counter',
-             // style: Theme.of(context).textTheme.headline4,
-           // ),
+            // Forgot Password Button
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: const TextStyle(fontSize: 22),
+              ),
+              onPressed: () {
+                // to do code
+              },
+              child: Text(
+                  'Reset password',
+                  style: TextStyle(
+                  fontSize: 20,
+                  //fontWeight: FontWeight.bold,
+              )
+              ),
+            ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+
     );
   }
 }
