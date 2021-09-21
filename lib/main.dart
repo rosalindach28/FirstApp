@@ -58,6 +58,8 @@ class _MyHomePageState extends State<HomePage> {
               'Your Subscriptions: ',
               // list of active subscriptions
               // listview
+              // click subscription go to subscription details
+
             ),
           ],
         ),

@@ -30,20 +30,25 @@ class _LoginOrSignUpPageState extends State<LoginOrSignUpPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-                'SubWatch',
-                style: TextStyle(
-                  fontSize: 40,
-                  fontWeight: FontWeight.bold,
-                )
+            Container(
+                margin: EdgeInsets.only(top: 40, bottom: 20),
+                child: Text( 'SubWatch',
+                    style: TextStyle(
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold,
+                    )
+                ),
+
             ),
+
             // Login Button
-            ElevatedButton(
+        Container(
+          margin: EdgeInsets.only(bottom: 5),
+          child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                 textStyle: const TextStyle(
                   fontSize: 22,
                 ),
-
               ),
               onPressed: () {
                 Navigator.push(
@@ -55,6 +60,7 @@ class _LoginOrSignUpPageState extends State<LoginOrSignUpPage> {
                   'Log in'
               ),
             ),
+        ),
             // Sign Up button here
             ElevatedButton(
               style: ElevatedButton.styleFrom(

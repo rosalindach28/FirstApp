@@ -15,12 +15,8 @@ class _SignUpPageState extends State<SignUpPage> {
 
   void _incrementCounter() {
     setState(() {
-      _counter++;
+   //   _counter++;
     });
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => LoginPage(title: 'Log in to account',)),
-    );
   }
 
   @override
@@ -38,58 +34,56 @@ class _SignUpPageState extends State<SignUpPage> {
             //   'Sign Up',
             //   style: Theme.of(context).textTheme.headline4,
             // ),
-            Text(
-              'Name:',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.lightBlue,
-                )
+            Container(
+              margin: EdgeInsets.all(15),
+              child: const TextField(
+                obscureText: false,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Name',
+                ),
+              ),
             ),
-            Text(
-              'Email:',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.lightBlue,
-                )
+            Container(
+              margin: EdgeInsets.only(top: 5, bottom: 10, right: 15, left: 15),
+              child: const TextField(
+                obscureText: false,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Email',
+                ),
+              ),
             ),
-            Text(
-              'Username:',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.lightBlue,
-                )
+            Container(
+              margin: EdgeInsets.only(top: 5, bottom: 10, right: 15, left: 15),
+              child: const TextField(
+                obscureText: false,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Username',
+                ),
+              ),
             ),
-            Text(
-              'Password:',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.lightBlue,
-                )
+            Container(
+              margin: EdgeInsets.only(top: 5, bottom: 10, right: 15, left: 15),
+              child: const TextField(
+                obscureText: true,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Password',
+                ),
+              ),
             ),
-
-        // TextButton(
-        //   style: TextButton.styleFrom(
-        //     textStyle: const TextStyle(fontSize: 22),
-        //   ),
-        //   onPressed: () {
-        //     Navigator.push(
-        //       context,
-        //       MaterialPageRoute(builder: (context) => LoginPage(title: 'Log in',)),
-        //     );
-        //   },
-        //   child: Text(
-        //       'Confirm',
-        //       style: TextStyle(
-        //         fontSize: 20,
-        //         //fontWeight: FontWeight.bold,
-        //   )
-        //   ),
-        // ),
-
+            Container(
+              margin: EdgeInsets.only(top: 5, bottom: 30, right: 15, left: 15),
+              child: const TextField(
+                obscureText: true,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: ' Confirm Password',
+                ),
+              ),
+            ),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
             textStyle: const TextStyle(

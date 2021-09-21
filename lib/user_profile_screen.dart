@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'add_new_subscription_screen.dart';
 
 class UserProfilePage extends StatefulWidget {
   UserProfilePage({Key? key, required this.title}) : super(key: key);
@@ -10,11 +11,9 @@ class UserProfilePage extends StatefulWidget {
 }
 
 class _UserProfilePageState extends State<UserProfilePage> {
-  int _counter = 0;
 
   void _incrementCounter() {
     setState(() {
-      _counter++;
     });
   }
 
@@ -29,33 +28,64 @@ class _UserProfilePageState extends State<UserProfilePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'My Profile',
-              style: Theme.of(context).textTheme.headline4,
+            Container(
+              margin: EdgeInsets.only(bottom: 25),
+              child: Text('Name: ',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  )
+              ),
             ),
-            Text(
-              'Name: ',
+            Container(
+              margin: EdgeInsets.only(bottom: 25),
+              child: Text('Email: ',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  )
+              ),
             ),
-            Text(
-              'Email: ',
+            Container(
+              margin: EdgeInsets.only(bottom: 25),
+              child: Text(
+                '------------------'
+                    ' Manage Subscriptions '
+                    '------------------',
+                  style: TextStyle(
+                    fontSize: 18,
+                   // fontWeight: FontWeight.bold,
+                  )
+              ),
             ),
-            Text(
-              '-------------------'
-                  ' Manage Subscriptions '
-                  '------------------ ',
+              // list of active subscriptions
+            Container(
+              margin: EdgeInsets.only(bottom: 20, top: 80),
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  textStyle: const TextStyle(fontSize: 18),
+                ),
+                onPressed: () {
+                  // edit fields
+                  // To do
+
+                },
+                child: Text('Edit Profile'),
+              ),
             ),
-            //Text(
-            //'$_counter',
-            // style: Theme.of(context).textTheme.headline4,
-            // ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter, // go to add sub page
-        tooltip: 'Add new subscription',
+        onPressed: () {
+          Navigator.push( // used to navigate between pages
+            context,
+            MaterialPageRoute(builder: (context) => AddNewSubPage(title: 'Add New Subscription')),
+          );
+        },
+        tooltip: 'Add Subscription',
         child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }

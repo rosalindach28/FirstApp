@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/edit_subscription_screen.dart';
 
 class SubscriptionDetailsPage extends StatefulWidget {
   SubscriptionDetailsPage({Key? key, required this.title}) : super(key: key);
@@ -28,38 +29,100 @@ class _SubscriptionDetailsState extends State<SubscriptionDetailsPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'Subscription Details',
-              style: Theme.of(context).textTheme.headline4,
+            Container(
+              margin: EdgeInsets.all(20),
+              child: Text( 'Subscription Details',
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  )
+              ),
+
             ),
-            Text(
-              'Subscription name: ',
+            Container(
+              margin: EdgeInsets.all(15),
+              child: Text('Subscription name: ',
+                  style: TextStyle(
+                    fontSize: 18,
+                    //fontWeight: FontWeight.bold,
+                  )
+
+              ),
             ),
-            Text(
-              'Service Provider:',
+            Container(
+              margin: EdgeInsets.only(bottom: 15),
+              child: Text('Service Provider: ',
+                  style: TextStyle(
+                    fontSize: 18,
+                    //fontWeight: FontWeight.bold,
+                  )
+              ),
             ),
-            Text(
-              'Renewal Date ',
+            Container(
+              margin: EdgeInsets.only(bottom: 15),
+              child: Text('Renewal Date: ',
+                  style: TextStyle(
+                    fontSize: 18,
+                    //fontWeight: FontWeight.bold,
+                  )
+              ),
             ),
-            Text(
-              'Amount Due:',
+            Container(
+              margin: EdgeInsets.only(bottom: 15),
+              child: Text('Amount Due: ',
+                  style: TextStyle(
+                    fontSize: 18,
+                    //fontWeight: FontWeight.bold,
+                  )
+              ),
             ),
-            Text(
-              'Time remaining until next billing:',
+            Container(
+              margin: EdgeInsets.only(bottom: 15),
+              child: Text('Time remaining until next billing: ',
+                  style: TextStyle(
+                    fontSize: 18,
+                    //fontWeight: FontWeight.bold,
+                  )
+              ),
             ),
-            //Text(
-            //'$_counter',
-            // style: Theme.of(context).textTheme.headline4,
-            // ),
+            // Edit button
+            Container(
+              margin: EdgeInsets.only(top: 10),
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  textStyle: const TextStyle(fontSize: 22),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => EditSubscriptionPage(title: 'Edit Subscription',)
+                    ),
+                  );
+                },
+                child: Text('Edit'),
+              ),
+            ),
+            // Remove Button
+            Container(
+              margin: EdgeInsets.only(bottom: 20),
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  textStyle: const TextStyle(fontSize: 22),
+                ),
+                onPressed: () {
+                  // confirmation message
+                  //   ),
+                  // );
+                },
+                child: Text('Remove'),
+              ),
+            ),
           ],
         ),
       ),
-      // add edit and remove button
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+
+      // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
