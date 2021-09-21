@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'login_or_sign_up.dart';
 import 'add_new_subscription_screen.dart';
-import 'subscription_details_screen.dart';
 import 'user_profile_screen.dart';
 
 void main() {
