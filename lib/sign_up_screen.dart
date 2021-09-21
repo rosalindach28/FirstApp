@@ -28,7 +28,7 @@ class _SignUpPageState extends State<SignUpPage> {
             //   style: Theme.of(context).textTheme.headline4,
             // ),
             Container(
-              margin: EdgeInsets.all(15),
+              margin: EdgeInsets.only(bottom: 20, left: 15, right: 15),
               child: const TextField(
                 obscureText: false,
                 decoration: InputDecoration(
@@ -38,7 +38,7 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
             ),
             Container(
-              margin: EdgeInsets.only(top: 5, bottom: 10, right: 15, left: 15),
+              margin: EdgeInsets.only(bottom:20, right: 15, left: 15),
               child: const TextField(
                 obscureText: false,
                 decoration: InputDecoration(
@@ -64,16 +64,6 @@ class _SignUpPageState extends State<SignUpPage> {
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Password',
-                ),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 5, bottom: 30, right: 15, left: 15),
-              child: const TextField(
-                obscureText: true,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: ' Confirm Password',
                 ),
               ),
             ),
