@@ -12,10 +12,6 @@ class EditSubscriptionPage extends StatefulWidget {
 
 class _EditSubscriptionPageState extends State<EditSubscriptionPage> {
 
-  void _incrementCounter() {
-    setState(() {});
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

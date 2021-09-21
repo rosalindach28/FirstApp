@@ -12,11 +12,6 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
 
-  void _setState() {
-    setState(() {
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -102,7 +97,6 @@ class _LoginPageState extends State<LoginPage> {
               child: Text('Reset password',
                   style: TextStyle(
                     fontSize: 20,
-                    //fontWeight: FontWeight.bold,
                   )
               ),
             ),

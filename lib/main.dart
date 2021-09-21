@@ -33,11 +33,8 @@ class HomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<HomePage> {
 
-  void _setState() {
-    setState(() {
-    });
-
-  }
+  String username = "Rosalinda";
+  final List<String> entries = <String>['Netflix', 'Hulu', 'Spotify','Amazon Prime'];
 
   @override
   Widget build(BuildContext context) {
@@ -45,22 +42,93 @@ class _MyHomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.deepPurple,
+              ),
+              child: Text(
+                'SubWatch',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text('Home'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomePage(title: 'Home',)),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.account_circle),
+              title: Text('Profile'),
+              onTap: () {
+                Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => UserProfilePage(title: 'My Profile',)),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.logout),
+              title: Text('Log out'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginOrSignUpPage(title: 'Log in or Sign up',)),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
       body: Center(
-
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'Welcome!',
-              style: Theme.of(context).textTheme.headline4,
+            Image(
+              image: NetworkImage('https://static.seattletimes.com/wp-content/uploads/2021/09/urn-publicid-ap-org-c043781704b89fd36c1bcce91aa4ef0eTV_Streaming_Obsession_90095-780x355.jpg')
             ),
-            Text(
-              'Your Subscriptions: ',
-              // list of active subscriptions
-              // listview
-              // click subscription go to subscription details
+            Container(
+              margin: EdgeInsets.all(20),
+              child: Text( 'Welcome $username',
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.lightBlue
+                  )
+              ),
+            ),
+            Container(
+                  //  margin: EdgeInsets.all(15),
+                  child: Text('Your Subscriptions: ',
+                  style: TextStyle(
+                    fontSize: 18,
+                    //fontWeight: FontWeight.bold,
+                  )
+              ),
+            ),
+            // list of active subscriptions
+            // use listview
+            Container(
+              margin: EdgeInsets.all(15),
+              child: Text('List of subscriptions here',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontStyle: FontStyle.italic,
+                  )
+              ),
+            ),
 
-            ),
           ],
         ),
       ),

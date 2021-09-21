@@ -11,13 +11,6 @@ class SubscriptionDetailsPage extends StatefulWidget {
 }
 
 class _SubscriptionDetailsState extends State<SubscriptionDetailsPage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,39 +78,43 @@ class _SubscriptionDetailsState extends State<SubscriptionDetailsPage> {
                   )
               ),
             ),
-            // Edit button
-            Container(
-              margin: EdgeInsets.only(top: 10),
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  textStyle: const TextStyle(fontSize: 22),
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => EditSubscriptionPage(title: 'Edit Subscription',)
+            // Group 2 buttons in Row
+            Row(
+              children: [
+                Container(
+                  margin: EdgeInsets.only(left: 90, right: 40),
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      textStyle: const TextStyle(fontSize: 22),
                     ),
-                  );
-                },
-                child: Text('Edit'),
-              ),
-            ),
-            // Remove Button
-            Container(
-              margin: EdgeInsets.only(bottom: 20),
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  textStyle: const TextStyle(fontSize: 22),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => EditSubscriptionPage(title: 'Edit Subscription',)
+                        ),
+                      );
+                    },
+                    child: Text('Edit'),
+                  ),
                 ),
-                onPressed: () {
-                  // confirmation message
-                  //   ),
-                  // );
-                },
-                child: Text('Remove'),
-              ),
-            ),
+                // Remove Button
+                Container(
+                 //margin: EdgeInsets.only(left: 20),
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      textStyle: const TextStyle(fontSize: 22),
+                    ),
+                    onPressed: () {
+                      // confirmation message
+                      //   ),
+                      // );
+                    },
+                    child: Text('Remove'),
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),

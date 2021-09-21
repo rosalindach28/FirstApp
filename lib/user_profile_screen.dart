@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/subscription_details_screen.dart';
 import 'add_new_subscription_screen.dart';
 
 class UserProfilePage extends StatefulWidget {
@@ -12,14 +13,10 @@ class UserProfilePage extends StatefulWidget {
 
 class _UserProfilePageState extends State<UserProfilePage> {
 
-  void _incrementCounter() {
-    setState(() {
-    });
-  }
+  final List<String> entries = <String>['Netflix', 'Hulu', 'Spotify', 'Amazon Prime'];
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -29,8 +26,8 @@ class _UserProfilePageState extends State<UserProfilePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
-              margin: EdgeInsets.only(bottom: 25),
-              child: Text('Name: ',
+              margin: EdgeInsets.only(bottom: 25, right: 40),
+              child: Text('Name: Rosalinda ',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -39,7 +36,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
             ),
             Container(
               margin: EdgeInsets.only(bottom: 25),
-              child: Text('Email: ',
+              child: Text('Email: rch@example.com ',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -60,12 +57,46 @@ class _UserProfilePageState extends State<UserProfilePage> {
             ),
               // list of active subscriptions
             Container(
+              margin: EdgeInsets.only(right: 200),
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  textStyle: const TextStyle(fontSize: 18),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SubscriptionDetailsPage(title: 'Subscription Details')),
+                  );
+
+                },
+                child: Text('Netflix'),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(right: 200),
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  textStyle: const TextStyle(fontSize: 18),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SubscriptionDetailsPage(title: 'Subscription Details')),
+                  );
+
+                },
+                child: Text('Hulu'),
+              ),
+            ),
+
+            Container(
               margin: EdgeInsets.only(bottom: 20, top: 80),
               child: TextButton(
                 style: TextButton.styleFrom(
                   textStyle: const TextStyle(fontSize: 18),
                 ),
                 onPressed: () {
+
                   // edit fields
                   // To do
 
@@ -76,9 +107,10 @@ class _UserProfilePageState extends State<UserProfilePage> {
           ],
         ),
       ),
+
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push( // used to navigate between pages
+          Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => AddNewSubPage(title: 'Add New Subscription')),
           );

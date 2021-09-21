@@ -60,6 +60,19 @@ class _AddNewSubPageState extends State<AddNewSubPage> {
             ),
             Container(
               margin: EdgeInsets.only(top: 5, bottom: 10, right: 15, left: 15),
+              child: TextField(
+                obscureText: false,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Price (optional)',
+                    labelStyle: TextStyle(
+                      fontSize: 16,
+                    )
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 5, bottom: 10, right: 15, left: 15),
               child: DateTimeFormField(
                 decoration: const InputDecoration(
                   hintText: 'Choose subscription date',

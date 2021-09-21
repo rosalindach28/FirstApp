@@ -11,13 +11,6 @@ class LoginOrSignUpPage extends StatefulWidget {
 }
 
 class _LoginOrSignUpPageState extends State<LoginOrSignUpPage> {
- // int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-    //  _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +19,6 @@ class _LoginOrSignUpPageState extends State<LoginOrSignUpPage> {
         title: Text(widget.title),
       ),
       body: Center(
-
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
