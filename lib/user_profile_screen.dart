@@ -88,7 +88,6 @@ class _UserProfilePageState extends State<UserProfilePage> {
                 child: Text('Hulu'),
               ),
             ),
-
             Container(
               margin: EdgeInsets.only(bottom: 20, top: 80),
               child: TextButton(
