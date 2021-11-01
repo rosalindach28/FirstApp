@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "567397150112",
+    "project_id": "subwatchapp-8da58",
+    "storage_bucket": "subwatchapp-8da58.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:567397150112:android:423b7dd523027cf2cd48c5",
+        "android_client_info": {
+          "package_name": "com.rchamale.my_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "567397150112-9ljg0pegn00fggttnpfksl0d4gjmgocm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8yXnqA9-iEw_DXFf0zt2SdvWKNsKu1Aw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "567397150112-9ljg0pegn00fggttnpfksl0d4gjmgocm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

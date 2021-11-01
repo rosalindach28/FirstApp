@@ -18,15 +18,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
       ),
-      home: LoginOrSignUpPage(title: 'Log in or Sign Up'),
+      home: LoginOrSignUpPage(),
     );
   }
 }
 
 class HomePage extends StatefulWidget {
-  HomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -42,7 +39,7 @@ class _MyHomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text("Home"),
       ),
       drawer: Drawer(
         child: ListView(
@@ -66,7 +63,8 @@ class _MyHomePageState extends State<HomePage> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => HomePage(title: 'Home',)),
+                  MaterialPageRoute(builder: (context) => HomePage()
+                  ),
                 );
               },
             ),
@@ -76,7 +74,8 @@ class _MyHomePageState extends State<HomePage> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => UserProfilePage(title: 'My Profile',)),
+                  MaterialPageRoute(builder: (context) => UserProfilePage()
+                  ),
                 );
               },
             ),
@@ -86,7 +85,8 @@ class _MyHomePageState extends State<HomePage> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => LoginOrSignUpPage(title: 'Log in or Sign up',)),
+                  MaterialPageRoute(builder: (context) => LoginOrSignUpPage()
+                  ),
                 );
               },
             ),
@@ -145,12 +145,12 @@ class _MyHomePageState extends State<HomePage> {
           margin: EdgeInsets.only(bottom: 20, top: 80),
           child: TextButton(
             style: TextButton.styleFrom(
-              textStyle: const TextStyle(fontSize: 18),
+              textStyle: TextStyle(fontSize: 18),
             ),
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => SubscriptionDetailsPage(title: 'Details',))
+                MaterialPageRoute(builder: (context) => SubscriptionDetailsPage.default1())
               );
 
             },
@@ -168,7 +168,7 @@ class _MyHomePageState extends State<HomePage> {
     onPressed: () {
     Navigator.push( // used to navigate between pages
     context,
-    MaterialPageRoute(builder: (context) => AddNewSubPage(title: 'Add New Subscription')),
+    MaterialPageRoute(builder: (context) => AddNewSubPage()),
     );
     },
     tooltip: 'Add Subscription',

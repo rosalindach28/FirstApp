@@ -1,3 +1,4 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
@@ -6,24 +7,22 @@ import 'subscription_details_screen.dart';
 import 'package:date_field/date_field.dart';
 
 class AddNewSubPage extends StatefulWidget {
-  AddNewSubPage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
 
   @override
   _AddNewSubPageState createState() => _AddNewSubPageState();
 }
 
 class _AddNewSubPageState extends State<AddNewSubPage> {
-  TextEditingController subNameController = TextEditingController();
-  TextEditingController serviceController = TextEditingController();
-  TextEditingController priceController = TextEditingController();
+
+  var subNameController = TextEditingController();
+  var serviceController = TextEditingController();
+  var priceController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text("Add New Subscription"),
       ),
       body: ListView(
         children: [
@@ -34,6 +33,7 @@ class _AddNewSubPageState extends State<AddNewSubPage> {
             Container(
               margin: EdgeInsets.only(top: 40, right: 15, left: 15, bottom: 20),
               child: TextField(
+                controller: subNameController,
                 obscureText: false,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
@@ -48,6 +48,7 @@ class _AddNewSubPageState extends State<AddNewSubPage> {
             Container(
               margin: EdgeInsets.only(right: 15, left: 15, bottom: 20),
               child: TextField(
+                controller: serviceController,
                 obscureText: false,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
@@ -61,6 +62,7 @@ class _AddNewSubPageState extends State<AddNewSubPage> {
             Container(
               margin: EdgeInsets.only(right: 15, left: 15, bottom: 40),
               child: TextField(
+                controller: priceController,
                 obscureText: false,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
@@ -78,12 +80,21 @@ class _AddNewSubPageState extends State<AddNewSubPage> {
                   textStyle: const TextStyle(fontSize: 22),
                 ),
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => HomePage(title: 'Home',)),
-                    // update homepage
-                  );
-                },
+                  // print(subNameController.text);
+                  // print(serviceController.text);
+                  // print(priceController.text);
+
+                  // send to FireBase
+
+
+                   Navigator.of(context).push(MaterialPageRoute(builder: (context) => SubscriptionDetailsPage(name: subNameController.text, service: serviceController.text, price: priceController.text)));
+                  //
+                //   Navigator.push(
+                //     context,
+                //     MaterialPageRoute(builder: (context) => HomePage(title: 'Home',)),
+                //     // update homepage
+                //   );
+                 },
                 child: Text(
                     'Confirm',
                     style: TextStyle(

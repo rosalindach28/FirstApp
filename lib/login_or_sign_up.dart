@@ -1,10 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'login_screen.dart';
 import 'sign_up_screen.dart';
-class LoginOrSignUpPage extends StatefulWidget {
-  LoginOrSignUpPage({Key? key, required this.title}) : super(key: key);
 
-  final String title;
+class LoginOrSignUpPage extends StatefulWidget {
 
   @override
   _LoginOrSignUpPageState createState() => _LoginOrSignUpPageState();
@@ -16,7 +15,7 @@ class _LoginOrSignUpPageState extends State<LoginOrSignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text("Log In or Sign Up"),
       ),
       body: Center(
         child: Column(
@@ -43,9 +42,11 @@ class _LoginOrSignUpPageState extends State<LoginOrSignUpPage> {
                 ),
               ),
               onPressed: () {
+               // FirebaseAuth.instance;
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => LoginPage(title: 'Log in',)),
+                  MaterialPageRoute(builder: (context) => LoginPage()
+                  ),
                 );
               },
               child: Text(
@@ -64,7 +65,8 @@ class _LoginOrSignUpPageState extends State<LoginOrSignUpPage> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => SignUpPage(title: 'Sign Up',)),
+                  MaterialPageRoute(builder: (context) => SignUpPage()
+                  ),
                 );
               },
               child: Text(

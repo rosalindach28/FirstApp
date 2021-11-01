@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:date_count_down/countdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
@@ -7,15 +6,19 @@ import 'package:intl/intl.dart';
 import 'package:my_app/edit_subscription_screen.dart';
 
 class SubscriptionDetailsPage extends StatefulWidget {
-  SubscriptionDetailsPage({Key? key, required this.title}) : super(key: key);
 
-  final String title;
+  String name, service, price;
+  SubscriptionDetailsPage.default1({this.name = "", this.service = "", this.price = "" });
+  SubscriptionDetailsPage({Key? key, required this.name,  required this.service,  required this.price}) : super(key: key);
 
   @override
-  _SubscriptionDetailsState createState() => _SubscriptionDetailsState();
+  _SubscriptionDetailsState createState() => _SubscriptionDetailsState(name, service, price);
 }
 
 class _SubscriptionDetailsState extends State<SubscriptionDetailsPage> {
+
+  final String name, service, price;
+  _SubscriptionDetailsState(this.name, this.service, this.price);
 
   static DateTime _selectedDate = DateTime.now();
 
@@ -46,9 +49,6 @@ class _SubscriptionDetailsState extends State<SubscriptionDetailsPage> {
     _timer.cancel();
   }
 
-
-
-
   @override
   Widget build(BuildContext context) {
     // time countdown string that will be displayed
@@ -57,45 +57,46 @@ class _SubscriptionDetailsState extends State<SubscriptionDetailsPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text("Subscription Details"),
       ),
-      body: Center(
+      body: ListView(
+        children: [
+          Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            // Container(
+            //   margin: EdgeInsets.only(bottom: 30),
+            //   child: Text('Subscription Details',
+            //       style: TextStyle(
+            //         fontSize: 30,
+            //         fontWeight: FontWeight.bold,
+            //       )
+            //   ),
+            // ),
             Container(
-              margin: EdgeInsets.only(bottom: 30),
-              child: Text( 'Subscription Details',
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                  )
-              ),
-
-            ),
-            Container(
-              margin: EdgeInsets.only(bottom: 30),
-              child: Text('Subscription name: ',
-                  style: TextStyle(
-                    fontSize: 18,
-                    //fontWeight: FontWeight.bold,
-                  )
-
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(bottom: 30),
-              child: Text('Service Provider: ',
+              margin: EdgeInsets.only(top: 50, bottom: 30),
+              child: Text('Subscription name: ${name}',
                   style: TextStyle(
                     fontSize: 18,
                     //fontWeight: FontWeight.bold,
                   )
+
               ),
             ),
             Container(
               margin: EdgeInsets.only(bottom: 30),
-              child: Text('Renewal Date: ' + DateFormat.yMMMd("en_US").format(_selectedDate),
-                    style: TextStyle(
+              child: Text('Service Provider: ${service}',
+                  style: TextStyle(
+                    fontSize: 18,
+                    //fontWeight: FontWeight.bold,
+                  )
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(bottom: 30),
+              child: Text('Amount Due: ${price}',
+                  style: TextStyle(
                     fontSize: 18,
                     //fontWeight: FontWeight.bold,
                   )
@@ -103,14 +104,13 @@ class _SubscriptionDetailsState extends State<SubscriptionDetailsPage> {
             ),
             Container(
               margin: EdgeInsets.only(bottom: 50),
-              child: Text('Amount Due: ',
+              child: Text('Renewal Date: ' + DateFormat.yMMMd("en_US").format(_selectedDate),
                   style: TextStyle(
                     fontSize: 18,
                     //fontWeight: FontWeight.bold,
                   )
               ),
             ),
-            // Text(DateFormat.yMMMd("en_US").format(_selectedDate)),
             Container(
               margin: EdgeInsets.only(bottom: 40),
               child: ElevatedButton(
@@ -157,7 +157,7 @@ class _SubscriptionDetailsState extends State<SubscriptionDetailsPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => EditSubscriptionPage(title: 'Edit Subscription',)
+                            builder: (context) => EditSubscriptionPage()
                         ),
                       );
                     },
@@ -184,8 +184,8 @@ class _SubscriptionDetailsState extends State<SubscriptionDetailsPage> {
           ],
         ),
       ),
-
-      // This trailing comma makes auto-formatting nicer for build methods.
+        ],
+      ),
     );
   }
 }

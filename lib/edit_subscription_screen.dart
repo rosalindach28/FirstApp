@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:my_app/main.dart';
 
 class EditSubscriptionPage extends StatefulWidget {
-  EditSubscriptionPage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
 
   @override
   _EditSubscriptionPageState createState() => _EditSubscriptionPageState();
@@ -16,7 +13,7 @@ class _EditSubscriptionPageState extends State<EditSubscriptionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text("Edit Subscription"),
       ),
       body: Center(
         child: Column(
@@ -62,7 +59,7 @@ class _EditSubscriptionPageState extends State<EditSubscriptionPage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => HomePage(title: 'Home',)
+                        builder: (context) => HomePage()
                     ),
                   );
                 },

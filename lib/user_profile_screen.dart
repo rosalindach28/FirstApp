@@ -3,9 +3,6 @@ import 'package:my_app/subscription_details_screen.dart';
 import 'add_new_subscription_screen.dart';
 
 class UserProfilePage extends StatefulWidget {
-  UserProfilePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
 
   @override
   _UserProfilePageState createState() => _UserProfilePageState();
@@ -19,7 +16,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text("My Profile"),
       ),
       body: Center(
         child: Column(
@@ -60,12 +57,12 @@ class _UserProfilePageState extends State<UserProfilePage> {
               margin: EdgeInsets.only(right: 200),
               child: TextButton(
                 style: TextButton.styleFrom(
-                  textStyle: const TextStyle(fontSize: 18),
+                  textStyle: TextStyle(fontSize: 18),
                 ),
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SubscriptionDetailsPage(title: 'Subscription Details')),
+                    MaterialPageRoute(builder: (context) => SubscriptionDetailsPage.default1()),
                   );
 
                 },
@@ -81,7 +78,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SubscriptionDetailsPage(title: 'Subscription Details')),
+                    MaterialPageRoute(builder: (context) => SubscriptionDetailsPage.default1()),
                   );
 
                 },
@@ -111,7 +108,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => AddNewSubPage(title: 'Add New Subscription')),
+            MaterialPageRoute(builder: (context) => AddNewSubPage()),
           );
         },
         tooltip: 'Add Subscription',
