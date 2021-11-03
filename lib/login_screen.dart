@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'main.dart';
 import 'package:my_app/main.dart';
 
 class LoginPage extends StatefulWidget {
@@ -14,11 +16,14 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    future: Firebase.initializeApp();
     return Scaffold(
       appBar: AppBar(
         title: Text("Log In"),
       ),
-      body: Center(
+      body:  ListView(
+        children: [
+      Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -115,6 +120,8 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ],
         ),
+      ),
+        ],
       ),
     );
   }

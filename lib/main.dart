@@ -32,7 +32,7 @@ class HomePage extends StatefulWidget {
 class _MyHomePageState extends State<HomePage> {
 
   String username = "Rosalinda";
-  final List<String> entries = <String>['Netflix', 'Hulu', 'Spotify','Amazon Prime'];
+
 
 
   @override
@@ -124,15 +124,6 @@ class _MyHomePageState extends State<HomePage> {
         // list of active subscriptions
         // use listview
         Container(
-          margin: EdgeInsets.all(15),
-          child: Text('List of subscriptions here',
-              style: TextStyle(
-                fontSize: 18,
-                fontStyle: FontStyle.italic,
-              )
-          ),
-        ),
-        Container(
          // margin: EdgeInsets.all(15),
           child: Text('List of subscriptions here',
               style: TextStyle(
@@ -141,6 +132,9 @@ class _MyHomePageState extends State<HomePage> {
               )
           ),
         ),
+        // Column(
+        //   children: subs.map((sub) => Text('${sub.name}\n ${sub.provider}\n ${sub.price}\n')).toList(),
+        // ),
         Container(
           margin: EdgeInsets.only(bottom: 20, top: 80),
           child: TextButton(
@@ -175,22 +169,7 @@ class _MyHomePageState extends State<HomePage> {
     child: Icon(Icons.add),
     ),
 
-    //   bottomNavigationBar: BottomNavigationBar(
-    //       items: <BottomNavigationBarItem>[
-    //         BottomNavigationBarItem(
-    //           icon: Icon(Icons.home),
-    //           label: 'Home',
-    //
-    // ),
-    //         BottomNavigationBarItem(
-    //           icon: Icon(Icons.account_circle),
-    //           label: 'Profile',
-    //
-    //     ),
-    //   ]
-    //
-    // ),
-    // This trailing comma makes auto-formatting nicer for build methods.
+ // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
