@@ -1,14 +1,9 @@
 import 'dart:async';
-
-import 'package:date_count_down/countdown.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-//import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:my_app/main.dart';
-import 'subscription_details_screen.dart';
-import 'package:date_field/date_field.dart';
+
 
 class AddNewSubPage extends StatefulWidget {
 
@@ -32,26 +27,6 @@ Future<void> _chooseDate(BuildContext context)async {
     });
   }
 }
-
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //    subNameController = TextEditingController();
-  //    serviceController = TextEditingController();
-  //    dateController = TextEditingController();
-  //  // _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-  //     setState(() {});
-  //  // });
-  // }
-
-// //dispose of timer when countdown is finished
-// @override
-// void dispose() {
-//   super.dispose();
-//   _timer.cancel();
-// }
-
 
   @override
   Widget build(BuildContext context) {
@@ -130,16 +105,6 @@ Future<void> _chooseDate(BuildContext context)async {
                 }
                 ),
           ),
-
-          // Container(
-          //   margin: EdgeInsets.only(bottom: 30),
-          //   child: Text('Time Remaining:\n' + timeCounter,
-          //       style: TextStyle(
-          //         fontSize: 18,
-          //         fontWeight: FontWeight.bold,
-          //       )
-          //   ),
-          // ),
                 Container(
                   margin: EdgeInsets.only(bottom: 90),
                   child: TextButton(
@@ -147,14 +112,14 @@ Future<void> _chooseDate(BuildContext context)async {
                       textStyle: const TextStyle(fontSize: 22),
                     ),
                     onPressed: () {
-                      //saveSubscription();
                       print(subNameController.text);
                       print(serviceController.text);
                       print(dateController.text);
 
                       // send to FireBase
-
-                      FirebaseDatabase.instance.reference().child('Users/Subscriptions/').set(
+                      // timestamp variable so every subscription is added to database instead of overwriting existing (default method)
+                      var timestamp = new DateTime.now().millisecondsSinceEpoch;
+                      FirebaseDatabase.instance.reference().child('Users/Subscriptions/' + timestamp.toString()).set(
                           {
                             "name" : subNameController.text,
                             "service provider" : serviceController.text,
@@ -166,22 +131,21 @@ Future<void> _chooseDate(BuildContext context)async {
                         print("Failed to add" + error.toString());
                       });
 
-                      // pass data to sub details screen and home screen
+                      // Pop up dialog box?
 
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) =>
-                              SubscriptionDetailsPage(
-                                  name: subNameController.text,
-                                  service: serviceController.text,
-                                  date: _selectedDate)
-                      )
-                      );
-                      //
-                      //   Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(builder: (context) => HomePage(title: 'Home',)),
-                      //     // update homepage
-                      //   );
+                      // Go back to home screen
+                      // Note: Need to run app again to update home screen when adding new subscription
+                      Navigator.pop(context);
+
+                      // pass details to subDetails Screen
+                      // Navigator.of(context).push(MaterialPageRoute(
+                      //     builder: (context) =>
+                      //         SubscriptionDetailsPage(
+                      //             name: subNameController.text,
+                      //             service: serviceController.text,
+                      //             date: _selectedDate)
+                      // )
+                      // );
                     },
                     child: Text(
                         'Confirm',
@@ -199,18 +163,5 @@ Future<void> _chooseDate(BuildContext context)async {
       ),
     );
   }
-  // void saveSubscription() {
-  //   String name = subNameController.text;
-  //   String service = serviceController.text;
-  //   String date = dateController.text;
-  //
-  //   Map<String,String> subscription = {
-  //     'name': name,
-  //     'service provider': service,
-  //     'renewal date': date,
-  //   };
-
-
-
   }
 

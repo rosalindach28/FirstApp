@@ -1,8 +1,10 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:my_app/subscription_details_screen.dart';
 import 'login_or_sign_up.dart';
 import 'add_new_subscription_screen.dart';
 import 'user_profile_screen.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -32,8 +34,41 @@ class HomePage extends StatefulWidget {
 class _MyHomePageState extends State<HomePage> {
 
   String username = "Rosalinda";
+  var subscriptionList = [];
 
+  _MyHomePageState() {
+    // load all subscriptions from firebase database and display in ListView
+    // subscriptions from database returned as hash map/ dictionary so need to iterate through each,
+    // retrieve values and then put the values in list (tempList)
+    FirebaseDatabase.instance.reference().child("Users/Subscriptions").once()
+        .then((datasnapshot) { // datasnapshot is value returned
+      print("Successfully loaded data");
+      print(datasnapshot);
+      print("Key:"); // database saves items as key-value pair
+      print(datasnapshot.key);
+      print("Value:");
+      print(datasnapshot.value);
+      // iterate through map of all items by using for-each loop
+      // k, v is key, value pair
+      // then adding each value to list
+      var subscriptionTempList = [];
+      print("Iterating through value map:");
+      datasnapshot.value.forEach((k, v) {
+        print(k);
+        print(v);
+        subscriptionTempList.add(v);
+      }); // end of loop
+      print("Final Subscription List");
+      print(subscriptionTempList);
+      subscriptionList = subscriptionTempList;
+      setState(() {
 
+      });
+    }).catchError((error) {
+      print("Failed to load data");
+      print(error.toString());
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +105,7 @@ class _MyHomePageState extends State<HomePage> {
             ),
             ListTile(
               leading: Icon(Icons.account_circle),
-              title: Text('Profile'),
+              title: Text('My Profile'),
               onTap: () {
                 Navigator.push(
                   context,
@@ -93,70 +128,64 @@ class _MyHomePageState extends State<HomePage> {
           ],
         ),
       ),
-      body: ListView(
-    children: [
-    Center(
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        // Image(
-        //     image: NetworkImage('https://static.seattletimes.com/wp-content/uploads/2021/09/urn-publicid-ap-org-c043781704b89fd36c1bcce91aa4ef0eTV_Streaming_Obsession_90095-780x355.jpg')
-        // ),
-        Container(
-          margin: EdgeInsets.all(20),
-          child: Text( 'Welcome $username',
-              style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.lightBlue
-              )
-          ),
-        ),
-        Container(
-          //  margin: EdgeInsets.all(15),
-          child: Text('Your Subscriptions: ',
-              style: TextStyle(
-                fontSize: 18,
-                //fontWeight: FontWeight.bold,
-              )
-          ),
-        ),
-        // list of active subscriptions
-        // use listview
-        Container(
-         // margin: EdgeInsets.all(15),
-          child: Text('List of subscriptions here',
-              style: TextStyle(
-                fontSize: 18,
-                fontStyle: FontStyle.italic,
-              )
-          ),
-        ),
-        // Column(
-        //   children: subs.map((sub) => Text('${sub.name}\n ${sub.provider}\n ${sub.price}\n')).toList(),
-        // ),
-        Container(
-          margin: EdgeInsets.only(bottom: 20, top: 80),
-          child: TextButton(
-            style: TextButton.styleFrom(
-              textStyle: TextStyle(fontSize: 18),
+
+      //TODO
+      // put text above ListView builder
+      // Service Logos
+      // Welcome
+      // My Subscriptions
+
+      body: ListView.builder(
+          itemCount: subscriptionList.length,
+          itemBuilder: (BuildContext context, int index) {
+            return ListTile(
+              onTap: (){
+                print(" Clicked subscription # " + (index+1).toString());
+
+                // go to subscription details page for subscription clicked
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SubscriptionDetailsPage(subscriptionList[index])),
+                );
+                },
+
+                // Navigator.of(context).push(MaterialPageRoute(
+                //     builder: (context) =>
+                //         SubscriptionDetailsPage(
+                //             name: subNameController.text,
+                //             service: serviceController.text,
+                //             date: _selectedDate)
+                // )
+                // );
+            title: Container(
+            margin: EdgeInsets.only(top: 5, bottom: 5, left: 20, right: 20),
+            child: Center(
+            child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+            // list of active subscriptions
+            Text("     Subscription # " + (index+1).toString()),
+            Text('${subscriptionList[index]['name']}',
+            style: TextStyle(
+            fontWeight: FontWeight.bold
             ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => SubscriptionDetailsPage.default1())
-              );
-
-            },
-            child: Text('Subscription Details'),
-          ),
-        ),
-      ],
-    ),
-    ),
-    ],
-    ),
-
+            ),
+            Text('${subscriptionList[index]['renewal date']}',
+            style: TextStyle(
+            fontWeight: FontWeight.bold
+            ),
+            ),
+            Text('${subscriptionList[index]['service provider']}',
+            style: TextStyle(
+            fontWeight: FontWeight.bold
+            ),
+            )
+            ],
+            ),
+            ),
+            ),
+            );
+          }),
 
     floatingActionButton: FloatingActionButton(
     onPressed: () {
@@ -168,7 +197,6 @@ class _MyHomePageState extends State<HomePage> {
     tooltip: 'Add Subscription',
     child: Icon(Icons.add),
     ),
-
  // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
