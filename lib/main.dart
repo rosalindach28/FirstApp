@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:my_app/subscription_details_screen.dart';
@@ -33,14 +34,16 @@ class HomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<HomePage> {
 
-  String username = "Rosalinda";
+  //String username = "Rosalinda";
+  var userID = FirebaseAuth.instance.currentUser!.uid;
   var subscriptionList = [];
 
+  // Run until a subscription is added
   _MyHomePageState() {
     // load all subscriptions from firebase database and display in ListView
     // subscriptions from database returned as hash map/ dictionary so need to iterate through each,
     // retrieve values and then put the values in list (tempList)
-    FirebaseDatabase.instance.reference().child("Users/Subscriptions").once()
+    FirebaseDatabase.instance.reference().child("Users/" + userID + "/Subscriptions").once()
         .then((datasnapshot) { // datasnapshot is value returned
       print("Successfully loaded data");
       print(datasnapshot);
@@ -165,17 +168,17 @@ class _MyHomePageState extends State<HomePage> {
             children: [
             // list of active subscriptions
             Text("     Subscription # " + (index+1).toString()),
-            Text('${subscriptionList[index]['name']}',
+            Text('${subscriptionList[index]['subscription name']}',
             style: TextStyle(
             fontWeight: FontWeight.bold
             ),
             ),
-            Text('${subscriptionList[index]['renewal date']}',
+            Text('${subscriptionList[index]["service provider"]}',
             style: TextStyle(
             fontWeight: FontWeight.bold
             ),
             ),
-            Text('${subscriptionList[index]['service provider']}',
+            Text('${subscriptionList[index]["due date"]}',
             style: TextStyle(
             fontWeight: FontWeight.bold
             ),

@@ -13,6 +13,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
+  var nameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -30,18 +31,18 @@ class _SignUpPageState extends State<SignUpPage> {
               'Sign Up',
               style: Theme.of(context).textTheme.headline4,
             ),
-            // Container(
-            //
-            //   margin: EdgeInsets.only(top: 30, bottom: 20, left: 15, right: 15),
-            //   child: TextField(
-            //     controller: nameController,
-            //     obscureText: false,
-            //     decoration: InputDecoration(
-            //       border: OutlineInputBorder(),
-            //       labelText: 'Name',
-            //     ),
-            //   ),
-            // ),
+            Container(
+
+              margin: EdgeInsets.only(top: 30, bottom: 20, left: 15, right: 15),
+              child: TextField(
+                controller: nameController,
+                obscureText: false,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Name',
+                ),
+              ),
+            ),
             Container(
               margin: EdgeInsets.only(bottom:20, right: 15, left: 15),
               child: TextField(
@@ -87,7 +88,7 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
             onPressed: () {
               // get name, email, password
-            //  print(nameController.text);
+            print(nameController.text);
               print(emailController.text);
               print(passwordController.text);
 
@@ -97,12 +98,10 @@ class _SignUpPageState extends State<SignUpPage> {
                  email: emailController.text, password: passwordController.text)
                   .then((value) {
                       print("Sign up was successful");
-                      final User? user = FirebaseAuth.instance.currentUser;
-                      final userID = user!.uid;
-                      FirebaseDatabase.instance.reference().child('Users/user001').set(
+                      FirebaseDatabase.instance.reference().child('Users/' + value.user!.uid + "/Profile").set(
                         {
-                          'name' : "test4",
-                          'ID' : userID
+                          'name' : nameController.text,
+                          'email' : emailController.text
                         }
                       );
                       Navigator.pop(context); // go back to previous screen

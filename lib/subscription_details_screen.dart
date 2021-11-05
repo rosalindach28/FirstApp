@@ -59,19 +59,9 @@ class _SubscriptionDetailsState extends State<SubscriptionDetailsPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            // Container(
-            //   margin: EdgeInsets.only(bottom: 30),
-            //   child: Text('Subscription Details',
-            //       style: TextStyle(
-            //         fontSize: 30,
-            //         fontWeight: FontWeight.bold,
-            //       )
-            //   ),
-            // ),
-
             Container(
               margin: EdgeInsets.only(top: 50, bottom: 30),
-              child: Text("Subscription name: ${widget.subscriptionDetails['name']}",
+              child: Text("Name: ${widget.subscriptionDetails['subscription name']}",
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
@@ -89,13 +79,14 @@ class _SubscriptionDetailsState extends State<SubscriptionDetailsPage> {
             ),
             Container(
               margin: EdgeInsets.only(bottom: 50),
-              child: Text("Renewal Date: ${widget.subscriptionDetails['renewal date']}",
+              child: Text("Due Date: ${widget.subscriptionDetails['due date']}",
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
                   )
               ),
             ),
+            // TODO fix set reminder button to show timer
             Container(
               margin: EdgeInsets.only(bottom: 40),
               child: ElevatedButton(
@@ -104,8 +95,10 @@ class _SubscriptionDetailsState extends State<SubscriptionDetailsPage> {
                     fontSize: 22,
                   ),
                 ),
+
                 onPressed: () {
-                  print("Works");
+                  setState(() {
+                  });
                   Container(
                     margin: EdgeInsets.only(bottom: 30),
                     child: Text('Time Remaining:\n',

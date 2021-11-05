@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
@@ -15,9 +16,8 @@ class _AddNewSubPageState extends State<AddNewSubPage> {
   var subNameController = TextEditingController();
   var serviceController = TextEditingController();
   var dateController = TextEditingController();
-
-
-DateTime _selectedDate = DateTime.now();
+  var userID = FirebaseAuth.instance.currentUser!.uid;
+  DateTime _selectedDate = DateTime.now();
 
 Future<void> _chooseDate(BuildContext context)async {
   final DateTime? dateChosen = await DatePicker.showDatePicker(context, showTitleActions: true);
@@ -93,7 +93,7 @@ Future<void> _chooseDate(BuildContext context)async {
                 obscureText: false,
                  decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'Renewal date',
+                  labelText: 'Due date',
                   labelStyle: TextStyle(
                     fontSize: 16,
                   )
@@ -118,12 +118,12 @@ Future<void> _chooseDate(BuildContext context)async {
 
                       // send to FireBase
                       // timestamp variable so every subscription is added to database instead of overwriting existing (default method)
-                      var timestamp = new DateTime.now().millisecondsSinceEpoch;
-                      FirebaseDatabase.instance.reference().child('Users/Subscriptions/' + timestamp.toString()).set(
+                     var timestamp = new DateTime.now().millisecondsSinceEpoch;
+                      FirebaseDatabase.instance.reference().child("Users/" + userID + "/Subscriptions/SubscriptionID" + timestamp.toString()).set(
                           {
-                            "name" : subNameController.text,
+                            "subscription name" : subNameController.text,
                             "service provider" : serviceController.text,
-                            "renewal date" : dateController.text
+                            "due date" : dateController.text
                           }
                       ).then((value) {
                         print("Successfully added subscription to database");
