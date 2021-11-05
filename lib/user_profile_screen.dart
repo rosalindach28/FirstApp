@@ -49,6 +49,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            // add ListViewBuilder
             Container(
               margin: EdgeInsets.only(bottom: 25),
               child: Text('Name: ${profileInfo[1]}',

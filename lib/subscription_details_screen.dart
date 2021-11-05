@@ -21,11 +21,11 @@ class SubscriptionDetailsPage extends StatefulWidget {
 
 class _SubscriptionDetailsState extends State<SubscriptionDetailsPage> {
 
-
-
-
   late Timer _timer; // Timer instance variable that will update countdown
 // have countdown update in real-time, every hour
+  bool pressed = false;
+  bool buttonDisabled = false;
+
 //
   @override
   void initState() {
@@ -46,7 +46,7 @@ class _SubscriptionDetailsState extends State<SubscriptionDetailsPage> {
   @override
   Widget build(BuildContext context) {
     // time countdown string that will be displayed
-  // String timeCounter = CountDown().timeLeft(date, "Subscription Payment Due");
+  //String timeCounter = CountDown().timeLeft(date, "Subscription Payment Due");
 
 
     return Scaffold(
@@ -86,6 +86,16 @@ class _SubscriptionDetailsState extends State<SubscriptionDetailsPage> {
                   )
               ),
             ),
+            Container(
+            margin: EdgeInsets.only(bottom: 30),
+            child: pressed ? Text('Time Remaining:\n',
+            style: TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+            )
+            ): SizedBox(),
+            ),
+
             // TODO fix set reminder button to show timer
             Container(
               margin: EdgeInsets.only(bottom: 40),
@@ -98,16 +108,9 @@ class _SubscriptionDetailsState extends State<SubscriptionDetailsPage> {
 
                 onPressed: () {
                   setState(() {
+                    pressed = true;
+                  //  buttonDisabled = true;
                   });
-                  Container(
-                    margin: EdgeInsets.only(bottom: 30),
-                    child: Text('Time Remaining:\n',
-                        style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                        )
-                    ),
-                  );
                 },
                 child: Text("Set Reminder")
                 ),

@@ -138,57 +138,72 @@ class _MyHomePageState extends State<HomePage> {
       // Welcome
       // My Subscriptions
 
-      body: ListView.builder(
-          itemCount: subscriptionList.length,
-          itemBuilder: (BuildContext context, int index) {
-            return ListTile(
-              onTap: (){
-                print(" Clicked subscription # " + (index+1).toString());
+      body: Column(
+        children :[
+          Container(
+            margin: EdgeInsets.all(15),
+            child: Text('My Subscriptions: ',
+                style: TextStyle(
+                  fontSize: 25,
+                  color: Colors.lightBlue,
+                  fontWeight: FontWeight.bold,
+                )
+            ),
+          ),
+          ListView.builder(
+            shrinkWrap: true,
+            itemCount: subscriptionList.length,
+            itemBuilder: (BuildContext context, int index) {
+              return ListTile(
+                onTap: (){
+                  print(" Clicked subscription # " + (index+1).toString());
 
-                // go to subscription details page for subscription clicked
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SubscriptionDetailsPage(subscriptionList[index])),
-                );
-                },
+                  // go to subscription details page for subscription clicked
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SubscriptionDetailsPage(subscriptionList[index])),
+                  );
+                  },
 
-                // Navigator.of(context).push(MaterialPageRoute(
-                //     builder: (context) =>
-                //         SubscriptionDetailsPage(
-                //             name: subNameController.text,
-                //             service: serviceController.text,
-                //             date: _selectedDate)
-                // )
-                // );
-            title: Container(
-            margin: EdgeInsets.only(top: 5, bottom: 5, left: 20, right: 20),
-            child: Center(
-            child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-            // list of active subscriptions
-            Text("     Subscription # " + (index+1).toString()),
-            Text('${subscriptionList[index]['subscription name']}',
-            style: TextStyle(
-            fontWeight: FontWeight.bold
-            ),
-            ),
-            Text('${subscriptionList[index]["service provider"]}',
-            style: TextStyle(
-            fontWeight: FontWeight.bold
-            ),
-            ),
-            Text('${subscriptionList[index]["due date"]}',
-            style: TextStyle(
-            fontWeight: FontWeight.bold
-            ),
-            )
-            ],
-            ),
-            ),
-            ),
-            );
-          }),
+                  // Navigator.of(context).push(MaterialPageRoute(
+                  //     builder: (context) =>
+                  //         SubscriptionDetailsPage(
+                  //             name: subNameController.text,
+                  //             service: serviceController.text,
+                  //             date: _selectedDate)
+                  // )
+                  // );
+              title: Container(
+              margin: EdgeInsets.only(top: 5, bottom: 5, left: 20, right: 20),
+              child: Center(
+              child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+              // list of active subscriptions
+              Text("     Subscription # " + (index+1).toString()),
+              Text('${subscriptionList[index]['subscription name']}',
+              style: TextStyle(
+              fontWeight: FontWeight.bold
+              ),
+              ),
+              Text('${subscriptionList[index]["service provider"]}',
+              style: TextStyle(
+              fontWeight: FontWeight.bold
+              ),
+              ),
+              Text('${subscriptionList[index]["due date"]}',
+              style: TextStyle(
+              fontWeight: FontWeight.bold
+              ),
+              )
+              ],
+              ),
+              ),
+              ),
+              );
+            }),
+      ]
+      ),
 
     floatingActionButton: FloatingActionButton(
     onPressed: () {
