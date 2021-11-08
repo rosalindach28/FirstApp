@@ -125,6 +125,9 @@ class _SubscriptionDetailsState extends State<SubscriptionDetailsPage> {
                       textStyle: const TextStyle(fontSize: 22),
                     ),
                     onPressed: () {
+
+
+
                       Navigator.push(
                         context,
                         MaterialPageRoute(

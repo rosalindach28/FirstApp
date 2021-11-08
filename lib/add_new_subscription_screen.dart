@@ -54,7 +54,6 @@ Future<void> _chooseDate(BuildContext context)async {
                   labelStyle: TextStyle(
                     fontSize: 16,
                   )
-
               ),
             ),
           ),

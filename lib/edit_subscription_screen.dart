@@ -3,11 +3,21 @@ import 'package:my_app/main.dart';
 
 class EditSubscriptionPage extends StatefulWidget {
 
+  var subscriptionDetails;
+  
+
   @override
   _EditSubscriptionPageState createState() => _EditSubscriptionPageState();
 }
 
 class _EditSubscriptionPageState extends State<EditSubscriptionPage> {
+
+  var newSubNameController = TextEditingController();
+  var newServiceController = TextEditingController();
+  var newDateController = TextEditingController();
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -20,30 +30,45 @@ class _EditSubscriptionPageState extends State<EditSubscriptionPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
-              margin: EdgeInsets.only(bottom: 15),
-              child: Text('Subscription name ',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+              margin: EdgeInsets.only(right: 15, left: 15, bottom: 20),
+              child: TextField(
+                controller: newSubNameController,
+                obscureText: false,
+                decoration: InputDecoration(
+                  //border: OutlineInputBorder(),
+                  labelText: 'Subscription Name',
+                  labelStyle: TextStyle(
+                  fontSize: 20,
                   )
+                ),
               ),
             ),
             Container(
-              margin: EdgeInsets.only(bottom: 15),
-              child: Text('Service provider ',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  )
+              margin: EdgeInsets.only(right: 15, left: 15, bottom: 20),
+              child: TextField(
+                controller: newServiceController,
+                obscureText: false,
+                decoration: InputDecoration(
+                  //border: OutlineInputBorder(),
+                    labelText: 'Service Provider',
+                    labelStyle: TextStyle(
+                      fontSize: 20,
+                    )
+                ),
               ),
             ),
             Container(
-              margin: EdgeInsets.only(bottom: 15),
-              child: Text('Renewal Date ',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  )
+              margin: EdgeInsets.only(right: 15, left: 15, bottom: 20),
+              child: TextField(
+                controller: newDateController,
+                obscureText: false,
+                decoration: InputDecoration(
+                  //border: OutlineInputBorder(),
+                    labelText: 'Payment due date',
+                    labelStyle: TextStyle(
+                      fontSize: 20,
+                    )
+                ),
               ),
             ),
             // Save changes button
