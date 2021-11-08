@@ -79,7 +79,7 @@ class _SubscriptionDetailsState extends State<SubscriptionDetailsPage> {
             ),
             Container(
               margin: EdgeInsets.only(bottom: 50),
-              child: Text("Due Date: ${widget.subscriptionDetails['due date']}",
+              child: Text("Payment due date: ${widget.subscriptionDetails['due date']}",
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,

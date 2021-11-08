@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:my_app/reset_password.dart';
 import 'main.dart';
 import 'package:my_app/main.dart';
 
@@ -13,6 +14,7 @@ class _LoginPageState extends State<LoginPage> {
 
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
+  bool _obscureText = true;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,7 @@ class _LoginPageState extends State<LoginPage> {
           children: <Widget>[
             Container(
               //height: 100,
-              margin: EdgeInsets.all(5),
+              margin: EdgeInsets.only(top: 40, bottom: 20),
               child: Text('SubWatch',
                   style: TextStyle(
                     fontSize: 40,
@@ -58,15 +60,23 @@ class _LoginPageState extends State<LoginPage> {
               margin: EdgeInsets.only(top: 5, bottom: 10, right: 15, left: 15),
               child: TextField(
                 controller: passwordController,
-                obscureText: true,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Password',
                   labelStyle: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                  )
+                  ),
+                  suffixIcon: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _obscureText =! _obscureText;
+                      });
+                    },
+                    child: Icon(_obscureText ? Icons.visibility_off : Icons.visibility),
+                  ),
                 ),
+                obscureText: _obscureText,
               ),
             ),
             // Login button
@@ -110,7 +120,11 @@ class _LoginPageState extends State<LoginPage> {
                 textStyle: TextStyle(fontSize: 22),
               ),
               onPressed: () {
-                // to do code
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ResetPasswordPage()
+                    ),
+                );
               },
               child: Text('Reset password',
                   style: TextStyle(

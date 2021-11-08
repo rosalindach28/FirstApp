@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:my_app/reset_password.dart';
 import 'package:my_app/subscription_details_screen.dart';
 import 'login_or_sign_up.dart';
 import 'add_new_subscription_screen.dart';
@@ -34,7 +35,6 @@ class HomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<HomePage> {
 
-  //String username = "Rosalinda";
   var userID = FirebaseAuth.instance.currentUser!.uid;
   var subscriptionList = [];
 

@@ -9,10 +9,8 @@ class UserProfilePage extends StatefulWidget {
   _UserProfilePageState createState() => _UserProfilePageState();
 
 }
-
 class _UserProfilePageState extends State<UserProfilePage> {
   var userID = FirebaseAuth.instance.currentUser!.uid;
-  //var profileInfo = [];
 
   var profileName = "";
   var profileEmail = "";
@@ -31,7 +29,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
     });
 
     reference.child("email").once()
-        .then((datasnapshot) { // datasnapshot is value returned
+        .then((datasnapshot) {
       print("Successfully loaded second data");
       profileEmail = datasnapshot.value;
       setState(() {}
@@ -57,7 +55,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Container (
-
+            margin: EdgeInsets.only(top: 50, bottom: 20),
             child: Text('Name: ' + profileName,
                 style: TextStyle(
                   fontSize: 18,
@@ -66,7 +64,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(bottom: 25),
+            margin: EdgeInsets.only(bottom: 20),
             child: Text('Email: ' + profileEmail,
                 style: TextStyle(
                   fontSize: 18,
@@ -75,7 +73,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(bottom: 20, top: 80),
+            margin: EdgeInsets.only(bottom: 20, top: 20),
             child: TextButton(
               style: TextButton.styleFrom(
                 textStyle: TextStyle(fontSize: 18),

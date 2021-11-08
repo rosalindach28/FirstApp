@@ -13,7 +13,9 @@ class _SignUpPageState extends State<SignUpPage> {
 
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
+  var confirmPasswordController = TextEditingController();
   var nameController = TextEditingController();
+  bool _obscureText = true;
 
   @override
   Widget build(BuildContext context) {
@@ -23,101 +25,117 @@ class _SignUpPageState extends State<SignUpPage> {
         title: Text("Sign Up"),
       ),
       body:
-        Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Sign Up',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            Container(
+        ListView(
+          children: [ Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Container(
 
-              margin: EdgeInsets.only(top: 30, bottom: 20, left: 15, right: 15),
-              child: TextField(
-                controller: nameController,
-                obscureText: false,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Name',
+                margin: EdgeInsets.only(top: 30, bottom: 20, left: 15, right: 15),
+                child: TextField(
+                  controller: nameController,
+                  obscureText: false,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Name',
+                  ),
                 ),
               ),
-            ),
-            Container(
-              margin: EdgeInsets.only(bottom:20, right: 15, left: 15),
-              child: TextField(
-                controller: emailController,
-                obscureText: false,
-                decoration: InputDecoration(
-                  hintText: "name@example.com",
-                  labelText: "E-mail address",
-                  border: OutlineInputBorder(),
-                ),
-                keyboardType: TextInputType.emailAddress,
-              ),
-            ),
-
-            // Container(
-            //   margin: EdgeInsets.only(top: 5, bottom: 10, right: 15, left: 15),
-            //   child: const TextField(
-            //     obscureText: false,
-            //     decoration: InputDecoration(
-            //       border: OutlineInputBorder(),
-            //       labelText: 'Username',
-            //     ),
-            //   ),
-            // ),
-            Container(
-              margin: EdgeInsets.only(top: 5, bottom: 10, right: 15, left: 15),
-              child: TextField(
-                controller: passwordController,
-                obscureText: true,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Password',
+              Container(
+                margin: EdgeInsets.only(bottom:20, right: 15, left: 15),
+                child: TextField(
+                  controller: emailController,
+                  obscureText: false,
+                  decoration: InputDecoration(
+                    hintText: "name@example.com",
+                    labelText: "E-mail address",
+                    border: OutlineInputBorder(),
+                  ),
+                  keyboardType: TextInputType.emailAddress,
                 ),
               ),
-            ),
-        Container(
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              textStyle: const TextStyle(
-                fontSize: 22,
+              Container(
+                margin: EdgeInsets.only(top: 20, bottom: 10, right: 15, left: 15),
+                child: TextField(
+                  controller: passwordController,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Password',
+                    suffixIcon: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _obscureText =! _obscureText;
+                        });
+                      },
+                      child: Icon(_obscureText ? Icons.visibility_off : Icons.visibility),
+                    ),
+                  ),
+                  obscureText: _obscureText,
+                ),
               ),
+              Container(
+                margin: EdgeInsets.only(top: 20, bottom: 10, right: 15, left: 15),
+                child: TextField(
+                  controller: confirmPasswordController,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: ' Confirm Password',
+                    suffixIcon: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _obscureText =! _obscureText;
+                        });
+                      },
+                      child: Icon(_obscureText ? Icons.visibility_off : Icons.visibility),
+                    ),
+                  ),
+                  obscureText: _obscureText,
 
+                ),
+              ),
+          Container(
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                textStyle: const TextStyle(
+                  fontSize: 22,
+                ),
+
+              ),
+              onPressed: () {
+                // get name, email, password
+              print(nameController.text);
+                print(emailController.text);
+                print(passwordController.text);
+
+                // send to Firebase for authentication
+
+              FirebaseAuth.instance.createUserWithEmailAndPassword(
+                   email: emailController.text, password: passwordController.text)
+                    .then((value) {
+                        print("Sign up was successful");
+                        FirebaseDatabase.instance.reference().child('Users/' + value.user!.uid + "/Profile").set(
+                          {
+                            'name' : nameController.text,
+                            'email' : emailController.text
+                          }
+                        );
+                        Navigator.pop(context); // go back to previous screen
+                }).catchError((error) {
+                  print("Sign up failed");
+                  print(error.toString());
+                });
+              },
+              child: Text(
+                  'Confirm'
+              ),
             ),
-            onPressed: () {
-              // get name, email, password
-            print(nameController.text);
-              print(emailController.text);
-              print(passwordController.text);
-
-              // send to Firebase for authentication
-
-            FirebaseAuth.instance.createUserWithEmailAndPassword(
-                 email: emailController.text, password: passwordController.text)
-                  .then((value) {
-                      print("Sign up was successful");
-                      FirebaseDatabase.instance.reference().child('Users/' + value.user!.uid + "/Profile").set(
-                        {
-                          'name' : nameController.text,
-                          'email' : emailController.text
-                        }
-                      );
-                      Navigator.pop(context); // go back to previous screen
-              }).catchError((error) {
-                print("Sign up failed");
-                print(error.toString());
-              });
-            },
-            child: Text(
-                'Confirm'
-            ),
+          )
+            ],
           ),
-        )
-          ],
-        ),
       ),
+    ]
+        ),
     );
   }
 }
