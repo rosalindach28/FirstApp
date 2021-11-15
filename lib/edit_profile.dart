@@ -3,8 +3,6 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 class EditUserProfilePage extends StatefulWidget {
-  // var profileDetails;
-  // EditUserProfilePage(this.profileDetails);
 
   @override
   _EditUserProfilePageState createState() => _EditUserProfilePageState();
@@ -19,12 +17,16 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
   var profileEmail = "";
 
   _EditUserProfilePageState() {
+    refreshProfile();
+  }
+
+  void refreshProfile() {
     var reference = FirebaseDatabase.instance
         .reference()
         .child("Users/" + userID + "/Profile");
     reference.child("name").once().then((datasnapshot) {
       // datasnapshot is value returned
-      print("Successfully loaded data");
+      // print("Successfully loaded data");
       profileName = datasnapshot.value;
       setState(() {});
     }).catchError((error) {
@@ -33,8 +35,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
     });
 
     reference.child("email").once().then((datasnapshot) {
-      // datasnapshot is value returned
-      print("Successfully loaded second data");
+      //  print("Successfully loaded second data");
       profileEmail = datasnapshot.value;
       setState(() {});
     }).catchError((error) {
@@ -61,7 +62,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                   child: TextField(
                     controller: newNameController
                       ..text = profileName.toString(),
-                    onChanged: (text) => {},
+                    onChanged: (text) => newEmailController.text,
                     obscureText: false,
                     decoration: InputDecoration(
                       labelText: 'Name',
@@ -78,7 +79,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                   child: TextField(
                     controller: newEmailController
                       ..text = profileEmail.toString(),
-                    onChanged: (text) => {},
+                    onChanged: (text) => newEmailController.text,
                     obscureText: false,
                     decoration: InputDecoration(
                       labelText: 'Email',
@@ -96,16 +97,29 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                 Container(
                   margin: EdgeInsets.only(top: 10),
                   child: TextButton(
+                    child: Text('Save Changes'),
                     style: TextButton.styleFrom(
                       textStyle: const TextStyle(fontSize: 22),
                     ),
                     onPressed: () {
-                      print(newNameController.text);
-                      print(newEmailController.text);
-                      // update database
-                      // update user profile page with new info
+                      //update database with new name and/or email address entered by user
+                      FirebaseDatabase.instance
+                          .reference()
+                          .child("Users/" + userID + "/Profile")
+                          .child("name")
+                          .set(newNameController.text);
+                      FirebaseDatabase.instance
+                          .reference()
+                          .child("Users/" + userID + "/Profile")
+                          .child("email")
+                          .set(newEmailController.text)
+                          .then((value) {
+                        showSavedSnackbar(context);
+                      }).catchError((error) {
+                        print(error.toString());
+                      });
+                      Navigator.pop(context);
                     },
-                    child: Text('Save Changes'),
                   ),
                 ),
               ],
@@ -114,5 +128,13 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
         ],
       ),
     );
+  }
+
+  void showSavedSnackbar(BuildContext context) {
+    final snackBar = SnackBar(
+      content: Text("Changes were saved"),
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }

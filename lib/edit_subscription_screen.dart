@@ -1,10 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:my_app/main.dart';
 
 class EditSubscriptionPage extends StatefulWidget {
-
-  var subscriptionDetails;
-  
 
   @override
   _EditSubscriptionPageState createState() => _EditSubscriptionPageState();
@@ -15,7 +16,7 @@ class _EditSubscriptionPageState extends State<EditSubscriptionPage> {
   var newSubNameController = TextEditingController();
   var newServiceController = TextEditingController();
   var newDateController = TextEditingController();
-
+  var userID = FirebaseAuth.instance.currentUser!.uid;
 
 
 
@@ -69,6 +70,12 @@ class _EditSubscriptionPageState extends State<EditSubscriptionPage> {
                       fontSize: 20,
                     )
                 ),
+                  // onTap: () async {
+                  //   await _chooseDate(context);
+                  //   newDateController.text = DateFormat.yMMMd("en_US").format(_selectedDate);
+                  //   print(dateController.text);
+                  //   print(_selectedDate);
+                  // }
               ),
             ),
             // Save changes button
@@ -79,6 +86,19 @@ class _EditSubscriptionPageState extends State<EditSubscriptionPage> {
                   textStyle: const TextStyle(fontSize: 22),
                 ),
                 onPressed: () {
+                  FirebaseDatabase.instance.reference().child("User/" + userID +"/Subscriptions").update(
+                    {
+                      "subscription name": newSubNameController.text,
+                      "service provider": newServiceController.text,
+                      "due date": newDateController.text
+                    }).then((value) {
+                    showSavedSnackbar(context);
+                    }).catchError((error) {
+                    print(error.toString());
+                    return AlertDialog(content: Text("Data not saved"));
+                  });
+                  //();
+                  Navigator.pop(context);
                   // confirmation message then go home
                   // home updates subscriptions
                   Navigator.push(
@@ -95,5 +115,14 @@ class _EditSubscriptionPageState extends State<EditSubscriptionPage> {
         ),
       ),
     );
+  }
+
+  void showSavedSnackbar(BuildContext context) {
+    final snackBar = SnackBar(
+      content: Text("Changes were saved"),
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
   }
 }
