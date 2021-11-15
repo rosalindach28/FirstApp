@@ -74,26 +74,26 @@ class _SignUpPageState extends State<SignUpPage> {
                   obscureText: _obscureText,
                 ),
               ),
-              Container(
-                margin: EdgeInsets.only(top: 20, bottom: 10, right: 15, left: 15),
-                child: TextField(
-                  controller: confirmPasswordController,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: ' Confirm Password',
-                    suffixIcon: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _obscureText =! _obscureText;
-                        });
-                      },
-                      child: Icon(_obscureText ? Icons.visibility_off : Icons.visibility),
-                    ),
-                  ),
-                  obscureText: _obscureText,
-
-                ),
-              ),
+              // Container(
+              //   margin: EdgeInsets.only(top: 20, bottom: 10, right: 15, left: 15),
+              //   child: TextField(
+              //     controller: confirmPasswordController,
+              //     decoration: InputDecoration(
+              //       border: OutlineInputBorder(),
+              //       labelText: ' Confirm Password',
+              //       suffixIcon: GestureDetector(
+              //         onTap: () {
+              //           setState(() {
+              //             _obscureText =! _obscureText;
+              //           });
+              //         },
+              //         child: Icon(_obscureText ? Icons.visibility_off : Icons.visibility),
+              //       ),
+              //     ),
+              //     obscureText: _obscureText,
+              //
+              //   ),
+              // ),
           Container(
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(

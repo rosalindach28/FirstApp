@@ -4,6 +4,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:my_app/subscription_details_screen.dart';
 
 
 class AddNewSubPage extends StatefulWidget {
@@ -101,6 +102,7 @@ Future<void> _chooseDate(BuildContext context)async {
                  await _chooseDate(context);
                   dateController.text = DateFormat.yMMMd("en_US").format(_selectedDate);
                   print(dateController.text);
+                  print(_selectedDate);
                 }
                 ),
           ),
@@ -116,9 +118,7 @@ Future<void> _chooseDate(BuildContext context)async {
                       print(dateController.text);
 
                       // send to FireBase
-                      // timestamp variable so every subscription is added to database instead of overwriting existing (default method)
-                     var timestamp = new DateTime.now().millisecondsSinceEpoch;
-                      FirebaseDatabase.instance.reference().child("Users/" + userID + "/Subscriptions/SubscriptionID" + timestamp.toString()).set(
+                      FirebaseDatabase.instance.reference().child("Users/" + userID + "/Subscriptions/").push().set(
                           {
                             "subscription name" : subNameController.text,
                             "service provider" : serviceController.text,
@@ -135,16 +135,6 @@ Future<void> _chooseDate(BuildContext context)async {
                       // Go back to home screen
                       // Note: Need to run app again to update home screen when adding new subscription
                       Navigator.pop(context);
-
-                      // pass details to subDetails Screen
-                      // Navigator.of(context).push(MaterialPageRoute(
-                      //     builder: (context) =>
-                      //         SubscriptionDetailsPage(
-                      //             name: subNameController.text,
-                      //             service: serviceController.text,
-                      //             date: _selectedDate)
-                      // )
-                      // );
                     },
                     child: Text(
                         'Confirm',

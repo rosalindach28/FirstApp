@@ -14,6 +14,8 @@ class SubscriptionDetailsPage extends StatefulWidget {
 
   SubscriptionDetailsPage.default1({this.subscriptionDetails = ""});
 
+  // DateTime? dueDate;
+  // SubscriptionDetailsPage.date(this.dueDate);
 
   @override
   _SubscriptionDetailsState createState() => _SubscriptionDetailsState();
@@ -25,7 +27,7 @@ class _SubscriptionDetailsState extends State<SubscriptionDetailsPage> {
 // have countdown update in real-time, every hour
   bool pressed = false;
   bool buttonDisabled = false;
-
+   //DateTime? dueDate;
 //
   @override
   void initState() {
@@ -45,8 +47,8 @@ class _SubscriptionDetailsState extends State<SubscriptionDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
-    // time countdown string that will be displayed
-  //String timeCounter = CountDown().timeLeft(date, "Subscription Payment Due");
+    //time countdown string that will be displayed
+  //String timeCounter = CountDown().timeLeft(widget.dueDate, "Subscription Payment Due");
 
 
     return Scaffold(
@@ -98,7 +100,7 @@ class _SubscriptionDetailsState extends State<SubscriptionDetailsPage> {
 
             // TODO fix set reminder button to show timer
             Container(
-              margin: EdgeInsets.only(bottom: 40),
+              margin: EdgeInsets.only(bottom: 60),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   textStyle: TextStyle(
@@ -115,19 +117,17 @@ class _SubscriptionDetailsState extends State<SubscriptionDetailsPage> {
                 child: Text("Set Reminder")
                 ),
             ),
-            // Group 2 buttons in Row
-            Row(
-              children: [
+            // // Group 2 buttons in Row
+            // Row(
+            //   children: [
                 Container(
-                  margin: EdgeInsets.only(left: 90, right: 40),
+                 // margin: EdgeInsets.only(bottom: 60),
                   child: TextButton(
+                    child: Text('Edit'),
                     style: TextButton.styleFrom(
                       textStyle: const TextStyle(fontSize: 22),
                     ),
                     onPressed: () {
-
-
-
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -135,27 +135,22 @@ class _SubscriptionDetailsState extends State<SubscriptionDetailsPage> {
                         ),
                       );
                     },
-                    child: Text('Edit'),
                   ),
                 ),
                 // Remove Button
-                Container(
-                 //margin: EdgeInsets.only(left: 20),
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      textStyle: const TextStyle(fontSize: 22),
-                    ),
-                    onPressed: () {
-                      // confirmation message
-                      //   ),
-                      // );
-                    },
-                    child: Text('Remove'),
-                  ),
-                ),
+                // Container(
+                //  //margin: EdgeInsets.only(left: 20),
+                //   child: TextButton(
+                //     child: Text('Remove'),
+                //     style: TextButton.styleFrom(
+                //       textStyle: const TextStyle(fontSize: 22),
+                //     ),
+                //     onPressed: () {
+                //       // confirmation message
+                //     },
+                //   ),
+                // ),
               ],
-            )
-          ],
         ),
       ),
         ],
