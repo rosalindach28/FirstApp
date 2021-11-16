@@ -110,6 +110,7 @@ class _SignUpPageState extends State<SignUpPage> {
                    email: emailController.text, password: passwordController.text)
                     .then((value) {
                         print("Sign up was successful");
+                        signUpSuccessful(context);
                         FirebaseDatabase.instance.reference().child('Users/' + value.user!.uid + "/Profile").set(
                           {
                             'name' : nameController.text,
@@ -120,6 +121,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 }).catchError((error) {
                   print("Sign up failed");
                   print(error.toString());
+                  signUpFailed(context);
                 });
               },
               child: Text(
@@ -133,5 +135,22 @@ class _SignUpPageState extends State<SignUpPage> {
     ]
         ),
     );
+  }
+
+  void signUpSuccessful(BuildContext context) {
+    final snackBar = SnackBar(
+      content: Text("Sign up was successful"),
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  void signUpFailed(BuildContext context) {
+    final snackBar = SnackBar(
+      content: Text("Sign up failed"),
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
   }
 }

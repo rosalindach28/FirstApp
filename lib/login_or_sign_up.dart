@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'login_screen.dart';
 import 'sign_up_screen.dart';
@@ -21,26 +20,17 @@ class _LoginOrSignUpPageState extends State<LoginOrSignUpPage> {
         children: [
           Center(
           child: Column(
-           // mainAxisAlignment: MainAxisAlignment.center,
+           mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-                Container(
-                child: Image(
-                image: NetworkImage('https://cdn.tuftsdaily.com/2021/04/Untitled-design-2-1024x576.png'),
+              Image(
+                  image: AssetImage("assets/Sub-Watch-Logo.png"),
+                  height: 290,
+                  width: 400,
+                  //fit: BoxFit.fitWidth,
                 ),
-                ),
-
-              Container(
-                  margin: EdgeInsets.only(top: 20, bottom: 30),
-                  child: Text( 'SubWatch',
-                      style: TextStyle(
-                        fontSize: 40,
-                        fontWeight: FontWeight.bold,
-                      )
-                  ),
-              ),
               // Login Button
           Container(
-            margin: EdgeInsets.only( bottom: 20),
+          margin: EdgeInsets.only(bottom: 10 ),
             child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   textStyle: const TextStyle(
@@ -48,7 +38,6 @@ class _LoginOrSignUpPageState extends State<LoginOrSignUpPage> {
                   ),
                 ),
                 onPressed: () {
-                 // FirebaseAuth.instance;
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => LoginPage()

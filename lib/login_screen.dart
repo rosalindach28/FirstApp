@@ -29,18 +29,14 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Container(
-              //height: 100,
-              margin: EdgeInsets.only(top: 40, bottom: 20),
-              child: Text('SubWatch',
-                  style: TextStyle(
-                    fontSize: 40,
-                    fontWeight: FontWeight.bold,
-                  )
-              ),
+            Image(
+              image: AssetImage("assets/Sub-Watch-Logo.png"),
+              height: 260,
+              width: 500,
+              //fit: BoxFit.fitWidth,
             ),
             Container(
-              margin: EdgeInsets.all(15),
+              margin: EdgeInsets.only(right: 15, left: 15, bottom: 15),
               child: TextField(
                 controller:  emailController,
                 obscureText: false,

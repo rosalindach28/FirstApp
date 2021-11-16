@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:my_app/edit_subscription_screen.dart';
-
+import 'package:async/async.dart';
 
 class SubscriptionDetailsPage extends StatefulWidget {
 
@@ -22,7 +22,7 @@ class _SubscriptionDetailsState extends State<SubscriptionDetailsPage> {
 // have countdown update in real-time, every hour
   bool pressed = false;
   //bool buttonDisabled = false;
-
+//RestartableTimer _timer2 = new RestartableTimer(_timerDuration, )
   @override
   void initState() {
     super.initState();
@@ -31,7 +31,8 @@ class _SubscriptionDetailsState extends State<SubscriptionDetailsPage> {
       setState(() {});
     });
   }
-
+void restartTimer() {
+}
   //dispose of timer when countdown is finished
   @override
   void dispose() {
@@ -58,7 +59,11 @@ class _SubscriptionDetailsState extends State<SubscriptionDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    //TODO get timer to implement monthly and yearly
+
     //time countdown string that will be displayed
+
     String deadline = widget.subscriptionDetails['due date'];
     // print(deadline);
     List<int> list = parseDateMonth(deadline);
