@@ -9,13 +9,8 @@ import 'package:my_app/edit_subscription_screen.dart';
 class SubscriptionDetailsPage extends StatefulWidget {
 
   var subscriptionDetails;
-
   SubscriptionDetailsPage(this.subscriptionDetails);
-
   SubscriptionDetailsPage.default1({this.subscriptionDetails = ""});
-
-  // DateTime? dueDate;
-  // SubscriptionDetailsPage.date(this.dueDate);
 
   @override
   _SubscriptionDetailsState createState() => _SubscriptionDetailsState();
@@ -26,13 +21,12 @@ class _SubscriptionDetailsState extends State<SubscriptionDetailsPage> {
   late Timer _timer; // Timer instance variable that will update countdown
 // have countdown update in real-time, every hour
   bool pressed = false;
-  bool buttonDisabled = false;
-   //DateTime? dueDate;
-//
+  //bool buttonDisabled = false;
+
   @override
   void initState() {
     super.initState();
-   _timer = Timer.periodic(const Duration(hours: 1), (timer)
+   _timer = Timer.periodic(const Duration(seconds: 1), (timer)
     {
       setState(() {});
     });
@@ -45,11 +39,34 @@ class _SubscriptionDetailsState extends State<SubscriptionDetailsPage> {
     _timer.cancel();
  }
 
+  // date = 'dec 14, 2021'
+  List<int> parseDateMonth( String date){
+    List<String> month = [ 'jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug',
+      'sep', 'oct', 'nov', 'dec'];
+    List<int> list = [];
+    List<String> items = date.split(" ");
+    int i;
+    for(i=0; i<12; i++){
+      if(items[0].toLowerCase() == month[i])
+        break;
+    }
+    list.add(i+1);
+    list.add( int.parse(items[1].substring(0, items[1].length-1)) );
+    list.add( int.parse(items[2]) );
+    return list;
+  }
+
   @override
   Widget build(BuildContext context) {
     //time countdown string that will be displayed
-  //String timeCounter = CountDown().timeLeft(widget.dueDate, "Subscription Payment Due");
-
+    String deadline = widget.subscriptionDetails['due date'];
+    // print(deadline);
+    List<int> list = parseDateMonth(deadline);
+    // print(list[0]);
+    // print(list[1]);
+    // print(list[2]);
+    DateTime dateTime = DateTime(list[2], list[0], list[1]);
+    String timeCounter = CountDown().timeLeft(dateTime, "Subscription Payment Due");
 
     return Scaffold(
       appBar: AppBar(
@@ -90,7 +107,7 @@ class _SubscriptionDetailsState extends State<SubscriptionDetailsPage> {
             ),
             Container(
             margin: EdgeInsets.only(bottom: 30),
-            child: pressed ? Text('Time Remaining:\n',
+            child: pressed ? Text('Time Remaining:\n' + timeCounter,
             style: TextStyle(
             fontSize: 22,
             fontWeight: FontWeight.bold,
@@ -98,7 +115,6 @@ class _SubscriptionDetailsState extends State<SubscriptionDetailsPage> {
             ): SizedBox(),
             ),
 
-            // TODO fix set reminder button to show timer
             Container(
               margin: EdgeInsets.only(bottom: 60),
               child: ElevatedButton(
@@ -107,7 +123,6 @@ class _SubscriptionDetailsState extends State<SubscriptionDetailsPage> {
                     fontSize: 22,
                   ),
                 ),
-
                 onPressed: () {
                   setState(() {
                     pressed = true;
@@ -117,39 +132,7 @@ class _SubscriptionDetailsState extends State<SubscriptionDetailsPage> {
                 child: Text("Set Reminder")
                 ),
             ),
-            // // Group 2 buttons in Row
-            // Row(
-            //   children: [
-                Container(
-                 // margin: EdgeInsets.only(bottom: 60),
-                  child: TextButton(
-                    child: Text('Edit'),
-                    style: TextButton.styleFrom(
-                      textStyle: const TextStyle(fontSize: 22),
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => EditSubscriptionPage()
-                        ),
-                      );
-                    },
-                  ),
-                ),
-                // Remove Button
-                // Container(
-                //  //margin: EdgeInsets.only(left: 20),
-                //   child: TextButton(
-                //     child: Text('Remove'),
-                //     style: TextButton.styleFrom(
-                //       textStyle: const TextStyle(fontSize: 22),
-                //     ),
-                //     onPressed: () {
-                //       // confirmation message
-                //     },
-                //   ),
-                // ),
+
               ],
         ),
       ),

@@ -39,6 +39,12 @@ class _SignUpPageState extends State<SignUpPage> {
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Name',
+                      labelStyle: TextStyle(
+                          fontSize: 17,
+                          //color: Colors.indigo,
+                          fontWeight: FontWeight.bold
+                      ),
+
                   ),
                 ),
               ),
@@ -50,6 +56,11 @@ class _SignUpPageState extends State<SignUpPage> {
                   decoration: InputDecoration(
                     hintText: "name@example.com",
                     labelText: "E-mail address",
+                    labelStyle: TextStyle(
+                        fontSize: 17,
+                        //color: Colors.indigo,
+                        fontWeight: FontWeight.w700
+                    ),
                     border: OutlineInputBorder(),
                   ),
                   keyboardType: TextInputType.emailAddress,
@@ -62,6 +73,11 @@ class _SignUpPageState extends State<SignUpPage> {
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Password',
+                    labelStyle: TextStyle(
+                        fontSize: 17,
+                        //color: Colors.indigo,
+                       fontWeight: FontWeight.bold
+                    ),
                     suffixIcon: GestureDetector(
                       onTap: () {
                         setState(() {
@@ -74,26 +90,6 @@ class _SignUpPageState extends State<SignUpPage> {
                   obscureText: _obscureText,
                 ),
               ),
-              // Container(
-              //   margin: EdgeInsets.only(top: 20, bottom: 10, right: 15, left: 15),
-              //   child: TextField(
-              //     controller: confirmPasswordController,
-              //     decoration: InputDecoration(
-              //       border: OutlineInputBorder(),
-              //       labelText: ' Confirm Password',
-              //       suffixIcon: GestureDetector(
-              //         onTap: () {
-              //           setState(() {
-              //             _obscureText =! _obscureText;
-              //           });
-              //         },
-              //         child: Icon(_obscureText ? Icons.visibility_off : Icons.visibility),
-              //       ),
-              //     ),
-              //     obscureText: _obscureText,
-              //
-              //   ),
-              // ),
           Container(
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(

@@ -1,24 +1,19 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:my_app/main.dart';
 
 class EditSubscriptionPage extends StatefulWidget {
+
+  var subscriptionDetails;
+  EditSubscriptionPage(this.subscriptionDetails);
 
   @override
   _EditSubscriptionPageState createState() => _EditSubscriptionPageState();
 }
 
 class _EditSubscriptionPageState extends State<EditSubscriptionPage> {
-
   var newSubNameController = TextEditingController();
   var newServiceController = TextEditingController();
   var newDateController = TextEditingController();
-  var userID = FirebaseAuth.instance.currentUser!.uid;
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -33,82 +28,88 @@ class _EditSubscriptionPageState extends State<EditSubscriptionPage> {
             Container(
               margin: EdgeInsets.only(right: 15, left: 15, bottom: 20),
               child: TextField(
-                controller: newSubNameController,
+                controller: newSubNameController
+                  ..text = "${widget.subscriptionDetails['subscription name']}",
+                onChanged: (text) => newSubNameController.text,
                 obscureText: false,
                 decoration: InputDecoration(
-                  //border: OutlineInputBorder(),
                   labelText: 'Subscription Name',
                   labelStyle: TextStyle(
-                  fontSize: 20,
-                  )
+                   color: Colors.indigo,
+                  fontSize: 22,
+                   fontWeight: FontWeight.bold
+                  ),
+                  suffixIcon: IconButton(
+                  onPressed: newSubNameController.clear,
+                  icon: Icon(Icons.clear),
+                ),
                 ),
               ),
             ),
             Container(
               margin: EdgeInsets.only(right: 15, left: 15, bottom: 20),
               child: TextField(
-                controller: newServiceController,
+                controller: newServiceController
+                  ..text = "${widget.subscriptionDetails['service provider']}",
+                onChanged: (text) => newServiceController.text,
                 obscureText: false,
                 decoration: InputDecoration(
-                  //border: OutlineInputBorder(),
                     labelText: 'Service Provider',
                     labelStyle: TextStyle(
-                      fontSize: 20,
-                    )
+                        color: Colors.indigo,
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold
+                    ),
+                  suffixIcon: IconButton(
+                  onPressed: newServiceController.clear,
+                  icon: Icon(Icons.clear),
                 ),
               ),
+            )
             ),
             Container(
               margin: EdgeInsets.only(right: 15, left: 15, bottom: 20),
               child: TextField(
-                controller: newDateController,
+                controller: newDateController
+              ..text = "${widget.subscriptionDetails['due date']}",
+                onChanged: (text) => newDateController,
                 obscureText: false,
                 decoration: InputDecoration(
-                  //border: OutlineInputBorder(),
+                  helperText: "Format: Aug 11, 2022",
+                    helperStyle: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
                     labelText: 'Payment due date',
-                    labelStyle: TextStyle(
-                      fontSize: 20,
-                    )
+                      labelStyle: TextStyle(
+                          color: Colors.indigo,
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold
+                    ),
+                  suffixIcon: IconButton(
+                  onPressed: newDateController.clear,
+                  icon: Icon(Icons.clear),
                 ),
-                  // onTap: () async {
-                  //   await _chooseDate(context);
-                  //   newDateController.text = DateFormat.yMMMd("en_US").format(_selectedDate);
-                  //   print(dateController.text);
-                  //   print(_selectedDate);
-                  // }
               ),
+            ),
             ),
             // Save changes button
             Container(
               margin: EdgeInsets.only(top: 10),
               child: TextButton(
+                child: Text('Confirm'),
                 style: TextButton.styleFrom(
                   textStyle: const TextStyle(fontSize: 22),
                 ),
                 onPressed: () {
-                  FirebaseDatabase.instance.reference().child("User/" + userID +"/Subscriptions").update(
-                    {
-                      "subscription name": newSubNameController.text,
-                      "service provider": newServiceController.text,
-                      "due date": newDateController.text
-                    }).then((value) {
-                    showSavedSnackbar(context);
-                    }).catchError((error) {
-                    print(error.toString());
-                    return AlertDialog(content: Text("Data not saved"));
-                  });
-                  //();
+                  //showSaveChangesSnackbar(context);
+                  print(newSubNameController.text);
+                  print(newServiceController.text);
+                  print(newDateController.text);
                   Navigator.pop(context);
-                  // confirmation message then go home
-                  // home updates subscriptions
+                  showSaveChangesSnackbar(context);
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) => HomePage()
-                    ),
+                    MaterialPageRoute(builder: (context) => HomePage(newSubNameController.text, newServiceController.text, newDateController.text)),
                   );
                 },
-                child: Text('Save Changes'),
               ),
             ),
           ],
@@ -117,12 +118,14 @@ class _EditSubscriptionPageState extends State<EditSubscriptionPage> {
     );
   }
 
-  void showSavedSnackbar(BuildContext context) {
+  void showSaveChangesSnackbar(BuildContext context) {
     final snackBar = SnackBar(
-      content: Text("Changes were saved"),
+      content: Text("Press update to see changes"),
     );
 
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
   }
+
+
 }

@@ -66,7 +66,11 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                     obscureText: false,
                     decoration: InputDecoration(
                       labelText: 'Name',
-                      labelStyle: TextStyle(fontSize: 20),
+                      labelStyle: TextStyle(
+                          fontSize: 23,
+                          color: Colors.indigo,
+                          fontWeight: FontWeight.w700
+                      ),
                       suffixIcon: IconButton(
                         onPressed: newNameController.clear,
                         icon: Icon(Icons.clear),
@@ -84,7 +88,9 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                     decoration: InputDecoration(
                       labelText: 'Email',
                       labelStyle: TextStyle(
-                        fontSize: 20,
+                        fontSize: 23,
+                          color: Colors.indigo,
+                            fontWeight: FontWeight.w700
                       ),
                       suffixIcon: IconButton(
                         onPressed: newEmailController.clear,

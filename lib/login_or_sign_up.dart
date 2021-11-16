@@ -17,67 +17,75 @@ class _LoginOrSignUpPageState extends State<LoginOrSignUpPage> {
       appBar: AppBar(
         title: Text("Log In or Sign Up"),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Container(
-                margin: EdgeInsets.only(bottom: 30),
-                child: Text( 'SubWatch',
-                    style: TextStyle(
-                      fontSize: 40,
-                      fontWeight: FontWeight.bold,
-                    )
+      body: ListView(
+        children: [
+          Center(
+          child: Column(
+           // mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+                Container(
+                child: Image(
+                image: NetworkImage('https://cdn.tuftsdaily.com/2021/04/Untitled-design-2-1024x576.png'),
+                ),
                 ),
 
-            ),
-
-            // Login Button
-        Container(
-          margin: EdgeInsets.only( bottom: 20),
-          child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                textStyle: const TextStyle(
-                  fontSize: 22,
-                ),
-              ),
-              onPressed: () {
-               // FirebaseAuth.instance;
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => LoginPage()
+              Container(
+                  margin: EdgeInsets.only(top: 20, bottom: 30),
+                  child: Text( 'SubWatch',
+                      style: TextStyle(
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold,
+                      )
                   ),
-                );
-              },
-              child: Text(
-                  'Log in'
               ),
-            ),
-        ),
-            // Sign Up button here
-            Container(
-              margin: EdgeInsets.only( bottom: 30),
-              child: ElevatedButton(
+              // Login Button
+          Container(
+            margin: EdgeInsets.only( bottom: 20),
+            child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   textStyle: const TextStyle(
                     fontSize: 22,
                   ),
-
                 ),
                 onPressed: () {
+                 // FirebaseAuth.instance;
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SignUpPage()
+                    MaterialPageRoute(builder: (context) => LoginPage()
                     ),
                   );
                 },
                 child: Text(
-                    'Sign Up'
+                    'Log in'
                 ),
               ),
-            ),
-          ],
+          ),
+              // Sign Up button here
+              Container(
+                margin: EdgeInsets.only( bottom: 30),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    textStyle: const TextStyle(
+                      fontSize: 22,
+                    ),
+
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SignUpPage()
+                      ),
+                    );
+                  },
+                  child: Text(
+                      'Sign Up'
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
+      ],
       ),
     );
   }
