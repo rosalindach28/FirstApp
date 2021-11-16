@@ -109,8 +109,10 @@ Future<void> _chooseDate(BuildContext context)async {
                             "due date": dateController.text
                           }
                       ).then((value) {
+                        showAddedSub(context);
                         print("Successfully added subscription to database");
                       }).catchError((error) {
+                        showFailedToAdd(context);
                         print("Failed to add" + error.toString());
                       });
 
@@ -133,6 +135,22 @@ Future<void> _chooseDate(BuildContext context)async {
         ],
       ),
     );
+  }
+
+  void showAddedSub(BuildContext context) {
+    final snackBar = SnackBar(
+      content: Text("New subscription was added successfully"),
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  void showFailedToAdd(BuildContext context) {
+    final snackBar = SnackBar(
+      content: Text(" Error: Failed to add new subscription"),
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
   }
 

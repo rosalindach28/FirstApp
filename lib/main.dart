@@ -267,8 +267,9 @@ class _MyHomePageState extends State<HomePage> {
                                         // print("${widget.date}");
                                         showSavedSnackbar(context);
                                       }).catchError((error) {
+                                        showNotSaved(context);
                                         print(error.toString());
-                                        return AlertDialog(content: Text("Data not saved"));
+
                                       });
                                     },
                                   )
@@ -356,6 +357,15 @@ class _MyHomePageState extends State<HomePage> {
     );
 
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  void showNotSaved(BuildContext context) {
+    final snackBar = SnackBar(
+      content: Text("Error: Subscription not updated"),
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
   }
 
 } // end of class

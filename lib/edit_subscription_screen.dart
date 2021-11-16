@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:my_app/main.dart';
 
 class EditSubscriptionPage extends StatefulWidget {
@@ -14,6 +16,19 @@ class _EditSubscriptionPageState extends State<EditSubscriptionPage> {
   var newSubNameController = TextEditingController();
   var newServiceController = TextEditingController();
   var newDateController = TextEditingController();
+
+
+  DateTime _selectedDate = DateTime.now();
+
+
+  Future<void> _chooseDate(BuildContext context)async {
+    final DateTime? dateChosen = await DatePicker.showDatePicker(context, showTitleActions: true);
+    if (dateChosen != null && dateChosen != _selectedDate){
+      setState(() {
+        _selectedDate = dateChosen;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,24 +85,26 @@ class _EditSubscriptionPageState extends State<EditSubscriptionPage> {
             Container(
               margin: EdgeInsets.only(right: 15, left: 15, bottom: 20),
               child: TextField(
-                controller: newDateController
-              ..text = "${widget.subscriptionDetails['due date']}",
-                onChanged: (text) => newDateController,
+                controller: newDateController,
                 obscureText: false,
                 decoration: InputDecoration(
-                  helperText: "Format: Aug 11, 2022",
-                    helperStyle: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
-                    labelText: 'Payment due date',
+                    labelText: 'New payment due date',
                       labelStyle: TextStyle(
                           color: Colors.indigo,
-                          fontSize: 22,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold
                     ),
-                  suffixIcon: IconButton(
-                  onPressed: newDateController.clear,
-                  icon: Icon(Icons.clear),
-                ),
+                //   suffixIcon: IconButton(
+                //   onPressed: newDateController.clear,
+                //   icon: Icon(Icons.clear),
+                // ),
               ),
+                  onTap: () async {
+                    await _chooseDate(context);
+                    newDateController.text =
+                        DateFormat.yMMMd("en_US").format(_selectedDate);
+                    print(newDateController.text);
+                  }
             ),
             ),
             // Save changes button

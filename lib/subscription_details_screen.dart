@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:my_app/edit_subscription_screen.dart';
-import 'package:async/async.dart';
+
 
 class SubscriptionDetailsPage extends StatefulWidget {
 
@@ -19,20 +19,19 @@ class SubscriptionDetailsPage extends StatefulWidget {
 class _SubscriptionDetailsState extends State<SubscriptionDetailsPage> {
 
   late Timer _timer; // Timer instance variable that will update countdown
-// have countdown update in real-time, every hour
   bool pressed = false;
   //bool buttonDisabled = false;
-//RestartableTimer _timer2 = new RestartableTimer(_timerDuration, )
+
   @override
   void initState() {
     super.initState();
+    // have countdown update in real-time, every second
    _timer = Timer.periodic(const Duration(seconds: 1), (timer)
     {
       setState(() {});
     });
   }
-void restartTimer() {
-}
+
   //dispose of timer when countdown is finished
   @override
   void dispose() {
@@ -71,6 +70,7 @@ void restartTimer() {
     // print(list[1]);
     // print(list[2]);
     DateTime dateTime = DateTime(list[2], list[0], list[1]);
+    // notification
     String timeCounter = CountDown().timeLeft(dateTime, "Subscription Payment Due");
 
     return Scaffold(
@@ -116,6 +116,7 @@ void restartTimer() {
             style: TextStyle(
             fontSize: 22,
             fontWeight: FontWeight.bold,
+            color: Colors.red
             )
             ): SizedBox(),
             ),
