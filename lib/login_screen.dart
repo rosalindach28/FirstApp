@@ -9,9 +9,7 @@ class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
 }
-
 class _LoginPageState extends State<LoginPage> {
-
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
   bool _obscureText = true;
@@ -95,6 +93,7 @@ class _LoginPageState extends State<LoginPage> {
                         );
 
                   }).catchError((error) {
+                    showLoginFailed(context);
                     print("Failed to login!!");
                     print(error.toString());
                   });
@@ -134,5 +133,12 @@ class _LoginPageState extends State<LoginPage> {
         ],
       ),
     );
+  }
+
+  void showLoginFailed(BuildContext context) {
+    final snackBar = SnackBar(
+      content: Text("Login failed, try again"),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }

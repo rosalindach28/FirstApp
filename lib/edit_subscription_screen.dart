@@ -16,19 +16,16 @@ class _EditSubscriptionPageState extends State<EditSubscriptionPage> {
   var newSubNameController = TextEditingController();
   var newServiceController = TextEditingController();
   var newDateController = TextEditingController();
+ // DateTime _selectedDate = DateTime.now();
 
-
-  DateTime _selectedDate = DateTime.now();
-
-
-  Future<void> _chooseDate(BuildContext context)async {
-    final DateTime? dateChosen = await DatePicker.showDatePicker(context, showTitleActions: true);
-    if (dateChosen != null && dateChosen != _selectedDate){
-      setState(() {
-        _selectedDate = dateChosen;
-      });
-    }
-  }
+  // Future<void> _chooseDate(BuildContext context)async {
+  //   final DateTime? dateChosen = await DatePicker.showDatePicker(context, showTitleActions: true);
+  //   if (dateChosen != null && dateChosen != _selectedDate){
+  //     setState(() {
+  //       _selectedDate = dateChosen;
+  //     });
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -85,26 +82,33 @@ class _EditSubscriptionPageState extends State<EditSubscriptionPage> {
             Container(
               margin: EdgeInsets.only(right: 15, left: 15, bottom: 20),
               child: TextField(
-                controller: newDateController,
+                controller: newDateController
+                  ..text = "${widget.subscriptionDetails['due date']}",
+                  onChanged: (text) => newDateController.text,
                 obscureText: false,
                 decoration: InputDecoration(
                     labelText: 'New payment due date',
+                      helperText: "Format: Nov 27, 2022",
+                      helperStyle: TextStyle(
+                        fontSize: 16,
+                          fontWeight: FontWeight.bold
+                      ),
                       labelStyle: TextStyle(
                           color: Colors.indigo,
                           fontSize: 18,
                           fontWeight: FontWeight.bold
                     ),
-                //   suffixIcon: IconButton(
-                //   onPressed: newDateController.clear,
-                //   icon: Icon(Icons.clear),
-                // ),
+                  suffixIcon: IconButton(
+                    onPressed: newDateController.clear,
+                    icon: Icon(Icons.clear),
+                  ),
               ),
-                  onTap: () async {
-                    await _chooseDate(context);
-                    newDateController.text =
-                        DateFormat.yMMMd("en_US").format(_selectedDate);
-                    print(newDateController.text);
-                  }
+                  // onTap: () async {
+                  //   await _chooseDate(context);
+                  //   newDateController.text =
+                  //       DateFormat.yMMMd("en_US").format(_selectedDate);
+                  //   print(newDateController.text);
+                  // }
             ),
             ),
             // Save changes button
@@ -116,7 +120,7 @@ class _EditSubscriptionPageState extends State<EditSubscriptionPage> {
                   textStyle: const TextStyle(fontSize: 22),
                 ),
                 onPressed: () {
-                  //showSaveChangesSnackbar(context);
+                  //showSaveChangesSnackBar(context);
                   print(newSubNameController.text);
                   print(newServiceController.text);
                   print(newDateController.text);

@@ -67,7 +67,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 20, bottom: 10, right: 15, left: 15),
+                margin: EdgeInsets.only(bottom: 10, right: 15, left: 15),
                 child: TextField(
                   controller: passwordController,
                   decoration: InputDecoration(
@@ -149,8 +149,6 @@ class _SignUpPageState extends State<SignUpPage> {
     final snackBar = SnackBar(
       content: Text("Sign up failed"),
     );
-
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
-
   }
 }

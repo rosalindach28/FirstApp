@@ -199,6 +199,7 @@ class _MyHomePageState extends State<HomePage> {
                             context,
                             MaterialPageRoute(builder: (context) => EditSubscriptionPage(subscriptionList[index])),
                           );
+                          //updateData(context, index);
                         },
                         backgroundColor: Colors.blue,
                         foregroundColor: Colors.white,
@@ -249,27 +250,27 @@ class _MyHomePageState extends State<HomePage> {
                                     style:
                                         TextStyle(fontWeight: FontWeight.bold),
                                   ),
+                                  // Button to implement updates from edit Subscription page
                                   TextButton(
                                     child: Text("Update",
                                       style: TextStyle(fontSize: 18),
                                     ),
                                     onPressed: () {
-                                      FirebaseDatabase.instance.reference().child("Users/" + userID +"/Subscriptions/" + keysList[index]).set(
+                                      FirebaseDatabase.instance.reference().child("Users/" + userID +"/Subscriptions/" + keysList[index]).update(
                                           {
                                             "subscription name": "${widget.name}",
                                             "service provider": "${widget.service}",
                                             "due date": "${widget.date}",
                                           }).then((value) {
-                                        // print(index);
-                                        // print(keysList[index]);
+                                         print(index);
+                                         refreshSubs();
                                         // print("${widget.name}");
                                         // print("${widget.service}");
                                         // print("${widget.date}");
-                                        showSavedSnackbar(context);
+                                        showSavedSnackBar(context);
                                       }).catchError((error) {
                                         showNotSaved(context);
                                         print(error.toString());
-
                                       });
                                     },
                                   )
@@ -278,7 +279,6 @@ class _MyHomePageState extends State<HomePage> {
                             ),
                           ))),
                 );
-
               }),
         ]),
       ]),
@@ -341,7 +341,8 @@ class _MyHomePageState extends State<HomePage> {
             ],
           ));
 
-
+  // void updateData(BuildContext context, int index) {
+  // }
 
   void showDeletedSnackBar(BuildContext context) {
     final snackBar = SnackBar(
@@ -351,7 +352,7 @@ class _MyHomePageState extends State<HomePage> {
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
-  void showSavedSnackbar(BuildContext context) {
+  void showSavedSnackBar(BuildContext context) {
     final snackBar = SnackBar(
       content: Text("Subscription was updated"),
     );
@@ -363,9 +364,8 @@ class _MyHomePageState extends State<HomePage> {
     final snackBar = SnackBar(
       content: Text("Error: Subscription not updated"),
     );
-
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
-
   }
+
 
 } // end of class
