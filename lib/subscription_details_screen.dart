@@ -138,11 +138,11 @@ class _SubscriptionDetailsState extends State<SubscriptionDetailsPage> {
                   ) : SizedBox(),
                 ),
                 Container(
-                  margin: EdgeInsets.only(bottom: 60),
+                  margin: EdgeInsets.only(bottom: 20),
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         textStyle: TextStyle(
-                          fontSize: 22,
+                          fontSize: 20,
                         ),
                       ),
                       onPressed: () {
@@ -150,7 +150,25 @@ class _SubscriptionDetailsState extends State<SubscriptionDetailsPage> {
                           pressed = true;
                         });
                       },
-                      child: Text("Set Reminder")
+                      child: Text("View Time Remaining")
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(bottom: 30),
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        textStyle: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          // set push notification for 1 day remaining
+                          showSendNotification(context);
+                        });
+                      },
+                      child: Text("Send notification")
                   ),
                 ),
                 // Group 2 buttons in Row
@@ -206,6 +224,14 @@ class _SubscriptionDetailsState extends State<SubscriptionDetailsPage> {
       content: Text("Next reminder set for " + yearlyDate),
     );
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  void showSendNotification(BuildContext context) {
+    final snackBar = SnackBar(
+      content: Text("You will be notified when 1 day is remaining to pay the subscription."),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
   }
 }
 
