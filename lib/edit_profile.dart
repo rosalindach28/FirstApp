@@ -3,7 +3,6 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 class EditUserProfilePage extends StatefulWidget {
-
   @override
   _EditUserProfilePageState createState() => _EditUserProfilePageState();
 }
@@ -25,8 +24,6 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
         .reference()
         .child("Users/" + userID + "/Profile");
     reference.child("name").once().then((datasnapshot) {
-      // datasnapshot is value returned
-      // print("Successfully loaded data");
       profileName = datasnapshot.value;
       setState(() {});
     }).catchError((error) {
@@ -69,8 +66,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                       labelStyle: TextStyle(
                           fontSize: 23,
                           color: Colors.indigo,
-                          fontWeight: FontWeight.w700
-                      ),
+                          fontWeight: FontWeight.w700),
                       suffixIcon: IconButton(
                         onPressed: newNameController.clear,
                         icon: Icon(Icons.clear),
@@ -88,10 +84,9 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                     decoration: InputDecoration(
                       labelText: 'Email',
                       labelStyle: TextStyle(
-                        fontSize: 23,
+                          fontSize: 23,
                           color: Colors.indigo,
-                            fontWeight: FontWeight.w700
-                      ),
+                          fontWeight: FontWeight.w700),
                       suffixIcon: IconButton(
                         onPressed: newEmailController.clear,
                         icon: Icon(Icons.clear),

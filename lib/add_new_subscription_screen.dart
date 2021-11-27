@@ -6,7 +6,6 @@ import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
 
 class AddNewSubPage extends StatefulWidget {
-
   @override
   _AddNewSubPageState createState() => _AddNewSubPageState();
 }
@@ -18,15 +17,15 @@ class _AddNewSubPageState extends State<AddNewSubPage> {
   var userID = FirebaseAuth.instance.currentUser!.uid;
   DateTime _selectedDate = DateTime.now();
 
-
-Future<void> _chooseDate(BuildContext context)async {
-  final DateTime? dateChosen = await DatePicker.showDatePicker(context, showTitleActions: true);
-  if (dateChosen != null && dateChosen != _selectedDate){
-    setState(() {
-      _selectedDate = dateChosen;
-    });
+  Future<void> _chooseDate(BuildContext context) async {
+    final DateTime? dateChosen =
+        await DatePicker.showDatePicker(context, showTitleActions: true);
+    if (dateChosen != null && dateChosen != _selectedDate) {
+      setState(() {
+        _selectedDate = dateChosen;
+      });
+    }
   }
-}
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +40,8 @@ Future<void> _chooseDate(BuildContext context)async {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Container(
-                  margin: EdgeInsets.only(
-                      top: 40, right: 15, left: 15, bottom: 20),
+                  margin:
+                      EdgeInsets.only(top: 40, right: 15, left: 15, bottom: 20),
                   child: TextField(
                     controller: subNameController,
                     obscureText: false,
@@ -51,9 +50,7 @@ Future<void> _chooseDate(BuildContext context)async {
                         labelText: 'Subscription Name',
                         labelStyle: TextStyle(
                           fontSize: 20,
-
-                        )
-                    ),
+                        )),
                   ),
                 ),
                 Container(
@@ -66,8 +63,7 @@ Future<void> _chooseDate(BuildContext context)async {
                         labelText: 'Service Provider',
                         labelStyle: TextStyle(
                           fontSize: 20,
-                        )
-                    ),
+                        )),
                   ),
                 ),
                 Container(
@@ -80,15 +76,13 @@ Future<void> _chooseDate(BuildContext context)async {
                           labelText: 'Due date',
                           labelStyle: TextStyle(
                             fontSize: 20,
-                          )
-                      ),
+                          )),
                       onTap: () async {
                         await _chooseDate(context);
                         dateController.text =
                             DateFormat.yMMMd("en_US").format(_selectedDate);
                         print(dateController.text);
-                      }
-                  ),
+                      }),
                 ),
                 Container(
                   margin: EdgeInsets.only(bottom: 90),
@@ -97,18 +91,16 @@ Future<void> _chooseDate(BuildContext context)async {
                       textStyle: const TextStyle(fontSize: 22),
                     ),
                     onPressed: () {
-                      // print(subNameController.text);
-                      // print(serviceController.text);
-                      // print(dateController.text);
                       //  send to FireBase
-                      FirebaseDatabase.instance.reference().child("Users/" +
-                          userID + "/Subscriptions/").push().set(
-                          {
-                            "subscription name": subNameController.text,
-                            "service provider": serviceController.text,
-                            "due date": dateController.text
-                          }
-                      ).then((value) {
+                      FirebaseDatabase.instance
+                          .reference()
+                          .child("Users/" + userID + "/Subscriptions/")
+                          .push()
+                          .set({
+                        "subscription name": subNameController.text,
+                        "service provider": serviceController.text,
+                        "due date": dateController.text
+                      }).then((value) {
                         showAddedSub(context);
                         print("Successfully added subscription to database");
                       }).catchError((error) {
@@ -120,13 +112,11 @@ Future<void> _chooseDate(BuildContext context)async {
                       // Note: Need to run app again to update home screen when adding new subscription
                       Navigator.pop(context);
                     },
-                    child: Text(
-                        'Confirm',
+                    child: Text('Confirm',
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                        )
-                    ),
+                        )),
                   ),
                 ),
               ],
@@ -152,7 +142,4 @@ Future<void> _chooseDate(BuildContext context)async {
 
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
-  }
-
-
-
+}
