@@ -25,37 +25,38 @@ class _SubscriptionDetailsState extends State<SubscriptionDetailsPage> {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {});
     });
-    AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
-      if (!isAllowed) {
-        showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-                  title: Text("Allow Notifications?"),
-                  content:
-                      Text("This app would like to send you notifications "),
-                  actions: [
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: Text(
-                        "Don't Allow",
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () => AwesomeNotifications()
-                          .requestPermissionToSendNotifications()
-                          .then((_) => Navigator.pop(context)),
-                      child: Text(
-                        "Allow",
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    )
-                  ],
-                ));
-      }
-    });
+    // Asks user for permission to display the app
+    // AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
+    //   if (!isAllowed) {
+    //     showDialog(
+    //         context: context,
+    //         builder: (context) => AlertDialog(
+    //               title: Text("Allow Notifications?"),
+    //               content:
+    //                   Text("This app would like to send you notifications "),
+    //               actions: [
+    //                 TextButton(
+    //                   onPressed: () {
+    //                     Navigator.pop(context);
+    //                   },
+    //                   child: Text(
+    //                     "Don't Allow",
+    //                     style: TextStyle(fontSize: 16),
+    //                   ),
+    //                 ),
+    //                 TextButton(
+    //                   onPressed: () => AwesomeNotifications()
+    //                       .requestPermissionToSendNotifications()
+    //                       .then((_) => Navigator.pop(context)),
+    //                   child: Text(
+    //                     "Allow",
+    //                     style: TextStyle(fontSize: 16),
+    //                   ),
+    //                 )
+    //               ],
+    //             ));
+    //   }
+    // });
   }
 
   //dispose of timer and notification stream when countdown is finished

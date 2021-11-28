@@ -24,9 +24,7 @@ class _LoginOrSignUpPageState extends State<LoginOrSignUpPage> {
               children: <Widget>[
                 SizedBox(
                   child: Image(
-                    image: AssetImage("assets/Final-Sub-Watch-Logo.png"),
-                    height: 390,
-                    width: 450,
+                    image: AssetImage("assets/applogo.png"),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -41,7 +39,7 @@ class _LoginOrSignUpPageState extends State<LoginOrSignUpPage> {
                       ),
                     ),
                     onPressed: () {
-                      //  if already logged in before, app goes directly to home screen
+                      // if already logged in before, app goes directly to home screen
                       SharedPreferences.getInstance().then((prefer) {
                         var loginStatus = prefer.getBool("login");
                         print("Login status is:");

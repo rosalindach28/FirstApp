@@ -47,11 +47,20 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
             onPressed: () {
               FirebaseAuth.instance
                   .sendPasswordResetEmail(email: emailController.text);
+              showLinkSent(context);
               Navigator.of(context).pop();
             },
           ),
         ],
       ),
+
     );
   }
+  void showLinkSent(BuildContext context) {
+    final snackBar = SnackBar(
+      content: Text("Link was sent to email."),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
 }

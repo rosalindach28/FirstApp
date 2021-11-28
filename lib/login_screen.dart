@@ -28,10 +28,8 @@ class _LoginPageState extends State<LoginPage> {
           Container(
             margin: EdgeInsets.only(right: 15, left: 15),
             child: Image(
-              image: AssetImage("assets/Final-Sub-Watch-Logo.png"),
-              height: 330,
-              width: 300,
-              fit: BoxFit.fitHeight,
+              image: AssetImage("assets/applogo.png"),
+              fit: BoxFit.cover,
             ),
           ),
           Center(

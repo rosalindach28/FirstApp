@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:my_app/edit_profile.dart';
+
 
 class UserProfilePage extends StatefulWidget {
   @override
@@ -77,22 +77,6 @@ class _UserProfilePageState extends State<UserProfilePage> {
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     )),
-              ),
-              Container(
-                margin: EdgeInsets.only(bottom: 20, top: 20),
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    textStyle: TextStyle(fontSize: 18),
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => EditUserProfilePage()),
-                    );
-                  },
-                  child: Text('Edit Profile'),
-                ),
               ),
             ],
           ),
