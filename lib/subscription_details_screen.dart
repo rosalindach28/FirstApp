@@ -25,7 +25,7 @@ class _SubscriptionDetailsState extends State<SubscriptionDetailsPage> {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {});
     });
-    // Asks user for permission to display the app
+    // Asks user for permission to display notifications on the app
     // AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
     //   if (!isAllowed) {
     //     showDialog(
